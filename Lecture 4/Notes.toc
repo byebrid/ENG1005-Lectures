@@ -1,0 +1,3 @@
+\contentsline {section}{Improper integrals: infinite integrals §9.2.2}{1}{section*.2}%
+\contentsline {section}{Summary}{2}{section*.3}%
+\contentsline {section}{Comparison principle: convergence}{2}{section*.4}%

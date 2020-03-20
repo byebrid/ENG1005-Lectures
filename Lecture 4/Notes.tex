@@ -1,0 +1,137 @@
+%%%%% This is a template for notes for ENG1005 lectures %%%%%
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 4}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section{Improper integrals: infinite integrals §9.2.2}
+Define integrals like
+\[ \int_0^\infty \frac{1}{1+x^2} \,dx \]
+
+We first regularize the integral by
+\[ \int_0^\varepsilon  \frac{1}{1+x^2} \,dx,\  \varepsilon>0 \]
+
+Then we define the integral as a limit
+\[ \int_0^\infty \frac{1}{1+x^2} \,dx = \lim_{\varepsilon\rightarrow\infty } \left( \int_0^\varepsilon  \frac{1}{1+x^2} \,dx \right) = \lim_{\lambda\searrow 0} \left( \int_0^{\frac{1}{\lambda}}  \frac{1}{1+x^2} \,dx \right) \]
+
+So
+\begin{align*}
+\int_0^\infty \frac{1}{1+x^2} \,dx &= \lim_{\varepsilon\rightarrow\infty } \left( \int_0^\varepsilon  \frac{1}{1+x^2} \,dx \right) \\
+ &=  \lim_{\varepsilon\rightarrow\infty } \left( \arctan(\varepsilon) - \arctan(0) \right) \\
+ &=  \lim_{\varepsilon\rightarrow\infty } \left( \arctan(\varepsilon) \right) \\
+ &= \frac{\pi}{2} 
+\end{align*}
+
+This shows that $\int_0^\infty \frac{1}{1+x^2} \,dx$ is a convergent improper integral.
+
+<INSERT PICTURE HERE!>
+
+\section{Summary}
+\begin{enumerate}
+\item If $f(x)$ is continuous on $[a, \infty)$, then
+\[ \int_a^\infty f(x) \,dx = \lim_{\varepsilon\rightarrow\infty} \int_a^\varepsilon f(x) \,dx \]
+
+\item If $f(x)$ is continuous on $(-\infty, \infty)$, then
+\[ \int_{-\infty}^\infty f(x) \,dx = \lim_{\varepsilon\rightarrow -\infty} \int_\varepsilon^c f(x) \,dx + \lim_{\lambda\rightarrow \infty} \int_c^\lambda f(x) \,dx  \]
+\end{enumerate}
+
+<MAYBE INSERT PICTURE HERE>
+
+\section{Comparison principle: convergence}
+\subsection*{Definition}
+\[ \int_1^\infty e^{-x^2} \,dx = \lim_{\varepsilon\rightarrow\infty} \int_1^\varepsilon e^{-x^2} \,dx \]
+but we can't compute $\int_1^\varepsilon e^{-x^2} \,dx$.
+
+\subsection*{Theorem (Comparison Test)}
+Suppose $f(x)$ and $g(x)$ (not magnitude of g(x)?) are continuous on $[a, \infty)$, $|f(x)| \leq g(x) $ for all $ x\in[a,\infty) $, and $\int_a^\infty g(x) \,dx$ converges.
+
+\[ \text{Then } \int_a^\infty f(x) \,dx \text{ also converges} \]
+
+\subsection*{Proof}
+If $|f(x)| \leq g(x) $, then
+\[ \left| \int_a^\varepsilon f(x) \,dx \right| \leq \int_a^\varepsilon |f(x)| \,dx \leq \int_a^\varepsilon g(x) \,dx \]
+(assuming g(x) converges)
+
+\subsection*{Example}
+Since
+\[ \left| e^{-x^2} \right| = e^{-x^2} \leq e^{-x} \]
+(couldn't we just say it's less than or equal to 1? No, because when we take the limit to infinity, it wouldn't converge!).
+
+and
+\begin{align*}
+\int_1^\infty e^{-x} \,dx &= \lim_{\varepsilon\rightarrow\infty} \int_1^\varepsilon e^{-x} \,dx \\
+ &= \lim_{\varepsilon\rightarrow\infty} \left( -e^{-\varepsilon} + e^{-1} \right)
+\end{align*}
+
+So by the Comparison Test, we conclude that 
+\[ \int_1^\infty e^{-x} \,dx \text{ is a convergent improper integral} \]
+
+\subsection*{Example}
+Determine if the improper integral
+\[ \int_1^\infty \frac{1}{1+xe^x} \,dx \]
+converges or diverges.
+
+\subsection*{Solution}
+\begin{align*}
+1 &\leq x \\
+e^x &\leq xe^x \\
+e^x &\leq 1 + xe^x \\
+\frac{1}{1 + xe^x} &\leq \frac{1}{e^x} \\
+\left| \frac{1}{1 + xe^x} \right| &\leq e^{-x}
+\end{align*}
+
+Since
+\[ \text{Since } \int_1^\infty e^{-x} \,dx \text{ is convergent, we deduce from the Comparison test that } \int_1^\infty \frac{1}{1 + xe^x} \,dx \text{ is also convergent.}\]
+
+\subsection*{Theorem (Comparsion Test)}
+Suppose $f(x)$ and $g(x)$ are continuous on $[a, b)$, $|f(x)| \leq g(x) $ for all $ x\in[a,b) $, and $\int_a^b g(x) \,dx$ converges.
+
+Then 
+\[ \int_a^b f(x) \,dx \text{ converges.}\]
+
+\subsection*{Example}
+\[ \int_0^\frac{\pi}{4} \frac{\cos(x)}{\sqrt{x}} \,dx \text{ convergent or not?} \]
+
+\subsection*{Solution}
+\[ 
+\left| \frac{\cos(x)}{\sqrt(x)} \right| = \frac{1}{\sqrt{x}} |\cos(x)| \leq \frac{1}{\sqrt{x}}
+\]
+
+\begin{align*}
+\int_0^\frac{\pi}{4} \frac{\cos(x)}{\sqrt{x}} \,dx &= \lim_{\varepsilon\searrow 0} \int_\varepsilon^\frac{\pi}{4}  \frac{1}{\sqrt{x}} \,dx \\
+ &= \lim_{\varepsilon\searrow 0} 2\sqrt{\frac{\pi}{4}} - 2\sqrt{\varepsilon} \\
+ &= \sqrt{\pi}
+\end{align*}
+
+
+
+
+\end{document}

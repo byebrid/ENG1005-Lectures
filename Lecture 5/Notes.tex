@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. For usage, see https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 5}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section{Comparison principle: divergence}
+\subsection*{Example}
+Determine if
+\[ \int_2^\infty \frac{2+\sin(x)}{x} \, dx \]
+is convergent or divergent.
+
+\subsection*{Solution}
+\[ \int_2^\infty \frac{2+\sin(x)}{x} \, dx = \lim_{\varepsilon\rightarrow\infty} \int_2^\varepsilon\frac{2+\sin(x)}{x} \, dx \]
+
+But observe that
+\[ 1 \leq 2 + \sin x,\ x \in \reals \]
+which gives
+\[ \frac{1}{x} \leq \frac{2 + \sin x}{x},\ x >0 \]
+
+So then
+\[ \int_2^\varepsilon\frac{1}{x} \, dx \leq \int_2^\varepsilon\frac{2+\sin(x)}{x} \, dx \]
+
+while
+\[
+\lim_{\varepsilon\rightarrow\infty} \int_2^\varepsilon\frac{1}{x} \, dx = \lim_{\varepsilon\rightarrow\infty} \left. \ln(x)\right|_2^\varepsilon = \lim_{\varepsilon\rightarrow\infty} \left( ln(\varepsilon) - ln(2) \right) = \infty
+\]
+
+So we conclude by the Comparison Theorem/Test that 
+\[ \lim_{\varepsilon\rightarrow\infty} \int_2^\varepsilon \frac{2+\sin x}{x} \,dx = \infty \]
+
+\[ \text{Then the improper integral } \int_2^\infty \frac{2+\sin(x)}{x} \, dx \text{ DNE.} \]
+
+\subsection*{Theorem (Comparison Test)}
+\begin{enumerate}[(i)]
+\item Suppose f(x), g(x) are continuous on $[a, \infty)$, $f(x) \leq g(x)$ for all $x \in [a, \infty)$, and
+\[ \lim_{\varepsilon\rightarrow\infty} \int_a^\varepsilon f(x) \,dx = \infty \]
+\[ \text{then } \int_a^\infty g(x) \,dx \text{ is divergent.} \]
+
+\item Suppose f(x), g(x) are continuous on $(a, b]$, $f(x) \leq g(x)$ for all $x \in (a, b]$, and
+\[ \lim_{\varepsilon\searrow a} \int_\varepsilon^b f(x) \,dx = \infty \]
+\[ \text{then } \int_a^b g(x) \,dx \text{ is divergent.} \]
+\end{enumerate}
+
+\subsection*{Proof}
+\begin{enumerate}[(i)]
+\item If $f(x) \leq g(x)$ for all x $[a, \infty)$, then
+\[ \int_a^\varepsilon f(x) \,dx \leq \int_a^\varepsilon g(x) \,dx = \infty for all \varepsilon > a \]
+
+So if
+\[ \lim_{\varepsilon \rightarrow \infty} \int_a^\varepsilon f(x) \,dx \leq \int_a^\varepsilon g(x) \,dx = \infty \]
+
+then
+\[ \lim_{\varepsilon \rightarrow \infty} \int_a^\varepsilon g(x) \,dx \leq \int_a^\varepsilon g(x) \,dx = \infty \]
+
+\[ \text{This proves that } \int_a^b g(x) \,dx \text{ is divergent.} \]
+
+\item Proof is similar to (i).
+
+\end{enumerate}
+
+\subsection*{Example}
+For what values of $p \in \reals$ is $\int_1^\infty (2 + \sin x) x^p \,dx$ convergent?
+
+\subsection*{Solution}
+Since
+\[ 1 \leq 2 + \sin x \leq 3, x \in \reals \]
+we get
+\[ x^p \leq x^p (2 + \sin x) \leq 3x^p, x \geq 0 \]
+
+So then
+\begin{equation} \label{inequality}
+\int_1^\varepsilon x^p \,dx \leq \int_1^\varepsilon (2+ \sin x) x^p \, dx \leq 3 \int_1^\varepsilon x^p \,dx
+\end{equation}
+
+Since
+\begin{align*}
+\int_1^\varepsilon x^p \,dx &= 
+\begin{cases}
+	\left. \frac{x^{p+1}}{p+1} \right|_1^\varepsilon & p \neq -1\\ 
+	\ln(x)|_1^\varepsilon & p = -1
+\end{cases} \\
+&=
+\begin{cases}
+	\left. \frac{\varepsilon^{p+1}}{p+1} - \frac{1}{p+1} \right|_1^\varepsilon & p \neq -1\\ 
+	\ln(\varepsilon)|_1^\varepsilon & p = -1
+\end{cases}
+\end{align*}
+
+We see
+\begin{equation} \label{evaluation}
+\lim_{\varepsilon \rightarrow \infty} \int_1^\varepsilon x^p \, dx = \begin{cases}
+	\infty & p =-1 \\
+	\infty & p + 1 > 0 <> p > -1 \\
+	- \frac{1}{p+1} & p + 1 < 0 <> p < -1
+\end{cases}
+\end{equation}
+
+We can conclude from (\ref{inequality}) and from (\ref{evaluation}) and the Comparison Test that 
+\[ \int_1^\varepsilon (2+ \sin x) x^p \, dx \]
+is convergent when $p < - 1$ and divergent when $p \geq -1$.
+
+\subsection*{Example}
+Determine if the improper integral
+\[ \int_0^1 \frac{1}{1-x^4} \, dx \]
+is convergent or divergent.
+
+\subsection*{Solution}
+Note that
+\begin{align*}
+1 - x^4 = (1-x^2)(1+x^2) = (1-x)(1+x)(1+x^2)
+\end{align*}
+
+So then
+\begin{align*}
+\frac{1}{(1-x)(1+x)(1+x^2)} &= \frac{1}{1-x^4} ,\ 0 \leq x < 1 \\
+\frac{1}{1-x} \cdot \frac{1}{(1+x)(1+x^2)} &= \frac{1}{1-x^4} ,\ 0 \leq x < 1 \\
+\end{align*}
+
+This shows
+\begin{align*}
+\frac{1}{4} \cdot \frac{1}{1-x} \leq \frac{1}{1-x^4} ,\ 0 \leq x < 1
+\end{align*}
+
+Integrate to get
+\begin{align*}
+\int_0^\varepsilon \frac{1}{4} \cdot \frac{1}{1-x} \,dx &\leq \int_0^\varepsilon \frac{1}{1-x^4} \,dx \\
+\left. -\frac{1}{4} \ln(1-x) \right|_0^\varepsilon \leq \int_0^\varepsilon \frac{1}{1-x^4} \,dx \\
+-\frac{1}{4} \ln(1-\varepsilon) \leq \int_0^\varepsilon \frac{1}{1-x^4} \,dx \\ \numberthis \label{evaluation2}
+\end{align*}
+
+Now
+\begin{equation} \label{inequality2}
+\lim_{\varepsilon\nearrow 1} -\frac{1}{4} \ln(1-\varepsilon) = \infty
+\end{equation}
+
+and we conclude via the Comparison Test and equations (\ref{inequality2}) and (\ref{evaluation2}) that
+\[ \int_0^1 \frac{1}{1-x^4} \, dx \text{ is divergent.} \]
+
+\end{document}

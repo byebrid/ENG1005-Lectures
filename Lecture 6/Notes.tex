@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{hyperref}
+
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+
+\begin{document}
+\title{Lecture 6 notes}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section{Sequences §7.2}
+\subsection*{Definition}
+A sequence is a countably infinite collection of numbers
+\[ \{a_n\}_{n=1}^\infty = \{ a_1, a_2, a_3, ...\} \]
+
+\subsection*{Example}
+\[ a_n = \frac{1}{n}, n\in \naturals \]
+
+\section{Limits of sequences §7.5, 7.5.1}
+A sequence $\{a_n\}_{n=1}^\infty$ is said to converge to a limit $l$, denoted
+if for any $\varepsilon>0$, there exists $N=N(\varepsilon), \varepsilon\in \naturals$ such that $|a_n-l| < \varepsilon|$ for $n>N$.
+
+\subsection*{Example}
+
+Show that 
+\[ \lim_{n\rightarrow\infty} \frac{1}{n} = 0 \]
+
+\subsection*{Solution}
+
+Fix $\varepsilon > 0$, choose $N \in \naturals$ such that $N>\frac{1}{\varepsilon}$.
+
+Then
+\[ n\geq N \Rightarrow \frac{1}{n} \leq \frac{1}{N} < \varepsilon \]
+
+and so
+\[ |\frac{1}{n} - 0| = \frac{1}{n} = \frac{1}{n} < \varepsilon \]
+
+\section{Properties of limits §7.5.2}
+\subsection*{Theorem}
+Suppose $\lim_{n\rightarrow\infty} a_n = l$ and $\lim_{n\rightarrow\infty} b_n = m$, then
+\begin{enumerate}
+\item \[ \lim_{n\rightarrow\infty} \left( a_n + b_n \right) = \lim_{n\rightarrow\infty} a_n + \lim_{n\rightarrow\infty} b_n\]
+
+\item \[ \lim_{n\rightarrow\infty} \left( a_n b_n \right) = \lim_{n\rightarrow\infty} a_n \lim_{n\rightarrow\infty} b_n\]
+
+\item \[ \lim_{n\rightarrow\infty} \left( \frac{a_n}{b_n} \right) = \frac{\lim_{n\rightarrow\infty} a_n}{\lim_{n\rightarrow\infty} b_n} \text{, provided that } m\neq0 \] 
+\end{enumerate}
+
+\subsection*{Theorem (Uniqueness of limit}
+Suppose $\lim_{n\rightarrow\infty} a_n = l$ and $\lim_{n\rightarrow\infty} a_n = l'$. Then $l=l'$. Moreover, if $\{a_{n_j}\}_{j=1}^\infty$ is my sub-sequence of $\{a_n\}_{n=1}^\infty$. 
+%For example, $n_j$ could equal $2n$, which would lead to getting every second element in $a_n$.
+Then
+\[ lim_{n\rightarrow\infty} \left( a_{n_j} \right) = lim_{n\rightarrow\infty} \left( a_n \right) =l \]
+
+For example, if you took the limit of every second term in the sequence, it would still be the same as the limit of every term.
+
+\subsection*{Theorem}
+Suppose $\lim_{x\rightarrow x_0}f(x)=l$ and $\lim_{n\rightarrow\infty}a_n=x_0$. Then
+\[ \lim_{n\rightarrow\infty}f(a_n)=l \]
+
+Conversely, if $\lim_{n\rightarrow\infty}f(a_n) = l$ for all sequences $\{a_n\}_{n=1}^\infty$ satisfying $\lim_{n\rightarrow\infty}a_n=x_0$, then $\lim_{x\rightarrow x_0}f(x)=l$.
+
+\section{Non-existence of limits}
+There can be many reasons why limits of sequences do not exist. The two most common are:
+
+\begin{enumerate}
+\item Oscillation
+
+The limit $\lim_{n\rightarrow\infty}(-1)^n$ DNE.
+
+\item Unboundedness
+
+The limit $\lim_{n'\rightarrow\infty}ln(n)$ DNE.
+\end{enumerate}
+
+\section{Series §7.6}
+\subsection*{Definition}
+A sum of the elements of a sequence $\{ a_n \}_{n=1}^\infty$,
+
+i.e.
+\[ \sum_{n=1}^\infty a_n = a_1 + a_2 + a_3 + ... \]
+is called a series.
+
+\subsection*{Examples}
+\[ \sum_{n=1}^\infty \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + ... \]
+\[ \sum_{n=1}^\infty \frac{1}{n^2} = 1 + \frac{1}{4} + \frac{1}{9} + ... \]
+\[ \sum_{n=0}^\infty (-1)^n = 1 + (-1) + 1 + (-1) + ... \]
+
+\subsection*{Definition}
+Given a sequence $\{ a_n \}_{n=1}^\infty$ and $N\in\naturals$, the Nth partial sum is defined by
+
+\[ S_N = \sum_{n=1}^N a_n = a_1 + a_2 + a_3 + ... + a_N \]
+
+\section{Convergence and divergence of a series}
+\subsection*{Definition}
+A series $ \sum_{n=1}^\infty a_n $ is said to converge (diverge) if the limit $\lim_{N\rightarrow\infty}S_N$ of partial sums exists (does not exist).
+
+If $\lim_{N\rightarrow\infty}S_N$ converges, then we define
+
+\[ \sum_{n=1}^\infty a_n := \lim_{N\rightarrow\infty}S_N \]
+
+\section{Geometric Series §7.3.2}
+\subsection*{Definition}
+\[ \sum_{n=0}^\infty a^n = 1 + a + a^2 + ... \]
+Note: this could be multiplied by a constant and still be a geometric series.
+
+Consider the partial sums
+\[ S_N =  \sum_{n=0}^N a^n = 1 + a + a^2 + ... + a^N \]
+
+Multiply by a to get
+\[ aS_N =  \sum_{n=0}^N a^n = a + a^2 + ... + a^N + a^{N+1} \]
+
+So
+\[ aS_N = S_{N-1} + a^{N+1} \]
+
+This gives
+\[ (a-1)S_N = -1 + a^{N+1} \]
+\[ S_N = \frac{1}{1-a} - \frac{a^{N+1}}{1-a}  \]
+
+Taking the limit $N\rightarrow\infty$, we find that
+\begin{align*}
+\lim_{N\rightarrow\infty}S_N &= \frac{1}{1-a} - \lim_{N\rightarrow\infty} \frac{a^{N+1}}{1-a}
+ &=
+ \begin{cases}
+ 	\frac{1}{1-a} & \text{if } |a| < 1 \\
+ 	\text{DNE} & \text{if } |a| \geq 1
+ \end{cases}
+\end{align*}
+
+Thus
+\[ \sum_{n=0}^N a^n = \frac{1}{1-a} \text{ for } |a| < 1 \]
+and
+\[ \sum_{n=0}^N a^n \text{ diverges for } |a| \geq 1 \]
+
+\end{document}

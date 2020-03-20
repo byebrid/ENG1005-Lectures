@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture <INSERT LECTURE NUMBER HERE>}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section{First section goes here}
+
+\end{document}
