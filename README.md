@@ -1,5 +1,5 @@
 # ENG1005 Lecture Notes
-Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Mathematics (Semester 1 2020). Most lectures notes were taken from conducted by Todd Oliynyk.
+Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Mathematics (Semester 1 2020). Most lectures notes were taken from lectures conducted by Todd Oliynyk.
 
 ## Contents
 - [Lecture 1](<Lecture 1/Week 1 Lecture 1 notes.docx>)
@@ -36,3 +36,7 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - Comparison Test
   - Ratio Test
   - Integral Test
+- [Lecture 8](<Lecture 8/Lecture8_notes.pdf>) - Power series
+  - Radius of convergence
+  - General power series
+  - Properties of power series

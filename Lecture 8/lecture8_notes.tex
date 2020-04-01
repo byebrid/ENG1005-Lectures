@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 8}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+\href{https://echo360.org.au/lesson/G_32340f5d-ff38-43d2-be9d-d88ddb1b3611_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-04-01T14:58:00.000_2020-04-01T15:53:00.000/classroom#sortDirection=desc}{Click here} for recording of lecture.
+
+\section{Power Series §7.7}
+\subsection{Definition}
+A series of the type $\displaystyle{\sum_{n=0}^\infty a_n x^n}$ is called a power series.
+
+\subsection{Key idea}
+$$f(x)=\sum_{n=0}^\infty a_n x^n$$
+Note: For analytic/homomorphic functions.
+
+\subsection{Example}
+The geometric series $\displaystyle{\frac{1}{1-x} = \sum_{n=0}^\infty x^n,\ |x|<1}$
+is a power series.
+
+\section{Radius of convergence §7.7.1}
+From the Ratio Test, we know that the power series $\displaystyle{\sum_{n=0}^\infty a_nx^n}$ will converge absolutely if
+\[ \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}x^{n+1}}{a_nx^n} \right| < 1 \]
+
+Notice
+\[  \left| \frac{a_{n+1}x^{n+1}}{a_nx^n} \right| = |x| \left| \frac{a+{n+1}}{a_n} \right| \]
+
+So
+\begin{align*}
+\lim_{n\rightarrow\infty} \left| \frac{a_{n+1}x^{n+1}}{a_nx^n} \right| &=  |x| \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n} \right| < 1 \\
+& \Leftrightarrow |x| < \frac{1}{\lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n} \right|} 
+\end{align*}
+
+But
+\[ \frac{1}{\lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n} \right|} = \lim_{n\rightarrow\infty} \left| \frac{a_n}{a_{n+1}} \right| \]
+
+and so we have that
+\[ \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}x^{n+1}}{a_nx^n} \right| < 1 \Leftrightarrow |x| < \lim_{n\rightarrow\infty} \left| \frac{a_n}{a_{n+1}} \right| \]
+
+\subsection{Theorem}
+Suppose $\displaystyle{\left\{ a_n \right\}_{n=0}^\infty }$ is a sequence for which the limit
+\[ r = \lim_{n\rightarrow\infty} \left| \frac{a_n}{a_{n+1}} \right| \]
+exists (we allow for $r=\infty$). Then the power series $\displaystyle{\sum_{n=0}^\infty} a_nx^n$ will converge absolutely for all $x$ satisfying $|x| < r$.
+
+\subsection{Theorem}
+The number $\displaystyle{r = \lim_{n\rightarrow\infty} \left| \frac{a_n}{a_{n+1}} \right| }$ is known as the radius of convergence of the power series $\displaystyle{\sum_{n=0}^\infty a_nx^n }$ and $(-r, r)$ ($|x|<r$) is called the interval of convergence.
+
+\subsection{Example}
+Show that the exponential series
+\[ e^x = \sum_{n=0}^\infty \frac{x^n}{n!} \hspace{2cm} \left[ e^x = \lim_{n\rightarrow\infty} \left(1+\frac{x}{n}\right)^n  \right] \]
+converges for all $x \in \reals$.
+
+\subsection{Solution}
+In our case, $\displaystyle{a_n = \frac{1}{n!}}$
+
+\begin{align*}
+r= \lim_{n\rightarrow\infty} \left| \frac{a_n}{a_{n+1}} \right| &= \lim_{n\rightarrow\infty} \left| \frac{\frac{1}{n!}}{\frac{1}{(n+1)!}} \right| \\
+&= \lim_{n\rightarrow\infty} \left| \frac{(n+1)!}{n!} \right| \\
+&= \lim_{n\rightarrow\infty} (n+1) \\
+&= \infty
+\end{align*}
+This shows that the exponential series $\displaystyle{\sum_{n=0}^\infty} \frac{x^n}{n!}$ has an infinite radius of convergence and hence it converges absolutely for all $x\in (-\infty, \infty)$.
+
+\subsection{Example}
+Determine the radius and interval of convergence for the power series 
+\[ \sum_{n=0}^\infty n!x^n \]
+
+\subsection{Solution}
+Since
+\[ \lim_{n\rightarrow\infty} \left| \frac{a_n}{a{n+1}} \right| = \lim_{n\rightarrow\infty} \left| \frac{n!}{(n+1)!} \right| = \lim_{n\rightarrow\infty} \frac{1}{n+1} = 0, \]
+the radius of convergence of $\displaystyle{\sum_{n=0}^\infty} x!n^n$ is zero and the series converges only at $x=0$.
+
+\section{General power series}
+\subsection{Definition}
+A power series about $x=x$ is a series of the form
+\[ \sum_{n=0}^\infty a_n(x-x_0)^n.\]
+\subsection{Remark}
+These power series can be converted into the standard form by setting
+\[ y=x-x_0. \]
+Because then
+\[ \sum_{n=0}^\infty a_n(x-x_0)^n = \sum_{n=0}^\infty a_n y^n \]
+The radius of convergence is computed in the same way.
+\[ r = \lim_{n\rightarrow\infty} \left| \frac{a_n}{a_{n+1}} \right| \]
+The series will then converge absolutely for
+\[ |y| < r \Leftrightarrow |x-x_0| < r \Leftrightarrow x\in (x_0 - r, x_0 + r) \]
+Note we have the interval of convergence on the right hand side of the above.
+
+\subsection{Example}
+Show that the logarithmic series
+\[ \ln(x) = \sum_{n=0}^\infty \frac{(-1)^{n+1}}{n} (x-1)^n \]
+converges for $0 < x < 2$. (In fact it converges for $0 < x \leq 2$).
+
+\subsection{Solution}
+The radius of convergence is given by 
+\begin{align*}
+r = \lim_{n\rightarrow\infty} \left| \frac{a_n}{a_{n+1}} \right| &= \lim_{n\rightarrow\infty} \left| \frac{\frac{(-1)^{n+1}}{n}}{\frac{(-1)^{n+2}}{n+1}} \right| \\
+&= \lim_{n\rightarrow\infty} \left| \frac{\frac{1}{n}}{\frac{1}{n+1}} \right| \\
+&= \lim_{n\rightarrow\infty} \frac{n+1}{n} \\
+&= \lim_{n\rightarrow\infty} \left( 1 + \frac{1}{n} \right) \\
+&= 1
+\end{align*}
+This shows that the logarithmic series $\displaystyle{\sum_{n=0}^\infty \frac{(-1)^{n+1}}{n} (x-1)^n }$ will converge on the interval
+\[ |x-1| < 1 \Leftrightarrow x \in (0, 2) \]
+
+\section{Properties of power series}
+\subsection{Addition}
+\[ \lim_{n\rightarrow\infty} a_n (x-x_0)^n + \lim_{n\rightarrow\infty} b_n (x-x_0)^n  = \lim_{n\rightarrow\infty} (a_n + b_n) (x-x_0)^n\]
+for all $x$ satisfying $|x-x_0| < r$ where $r = \min \{r_a, r_b\}$ where $r_a$ and $r_b$ are the radii of convergence of the power series $\displaystyle{\lim_{n\rightarrow\infty} a_n (x-x_0)^n}$ and $\displaystyle{\lim_{n\rightarrow\infty} b_n (x-x_0)^n}$, respectively.
+
+\subsection{Differentiation}
+\[ \frac{d}{dx} \left( \lim_{n\rightarrow\infty} a_n(x-x_0)^n \right) = \lim_{n\rightarrow\infty} a_n n (x-x_0)^{n-1} \]
+for all $x$ satisfying $|x-x_0| < r$.
+
+\subsection{Integration}
+\[ \int \sum_{n=0}^\infty a_n (x-x_0)^n\, dx = \sum_{n=0}^\infty \frac{a_n}{n+1} (x-x_0)^{n+1} + c \]
+for all $x$ satisfying $|x-x_0| < r$.
+ 
+\end{document}
