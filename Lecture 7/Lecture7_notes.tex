@@ -1,0 +1,139 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 7 - Convergence Tests}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section{Basic premise}
+For a series $\displaystyle{\sum_{n=1}^\infty a_n}$ to have any chance of converging, the terms $a_n$ must get small as $n$ gets large.
+
+\section{Theorem (Tails of series)}
+If $\displaystyle{\lim_{n\rightarrow\infty}a_n \not=0}$, then the series $\displaystyle{\sum_{n=1}^\infty a_n}$ diverges.
+
+\subsection{Example}
+The series $\displaystyle{\sum_{n=0}^\infty (-1)^n}$ diverges because the limit $\displaystyle{\lim_{n\rightarrow\infty} (-1)^n}$ DNE. 
+
+\subsection{Definition}
+A series $\displaystyle{\sum_{n=1}^\infty a_n}$ is said to converge absolutely if the series $\displaystyle{\sum_{n=1}^\infty |a_n|}$ converges.
+
+\subsection{Remark}
+Absolute convergence implies convergence.
+
+\section{Theorem (Compare Test)}
+\begin{enumerate}[ (i) ]
+\item If $|a_n| \leq b_n,\ n\ \in \naturals$, and $\displaystyle{\sum_{n=1}^\infty b_n}$ converges then $\displaystyle{\sum_{n=1}^\infty a_n}$ converges absolutely.
+
+\item If $a_n \leq b_n, n\ \in \naturals$, and $\displaystyle{\lim_{N\rightarrow\infty}} \sum_{n=1}^N a_n = \infty$, then  $\displaystyle{\lim_{N\rightarrow\infty}} \sum_{n=1}^N b_n$ diverges.
+\end{enumerate}
+
+\subsection{Example}
+Determine if the series
+$$\sum_{n=0}^\infty \frac{\sin^2(n)}{2^n}$$
+converges.
+
+\subsection{Solution}
+Since $\displaystyle{0 \leq \frac{\sin^2(n)}{2^n} \leq \frac{1}{2^n},\ n \in \naturals_0,}$ and we know that $\displaystyle{\sum_{n=0}^\infty \frac{1}{2^n}}$ converges, it follows from the Comparison test that the series $\displaystyle{\sum_{n=0}^\infty \frac{\sin^2(n)}{2^n}}$ converges.
+
+\section{Theorem (Ratio Test)}
+Given a sequence $\left\{ a_n \right\}_{n=1}^\infty$, let $\displaystyle{l = \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n}\right|}$, the series $\displaystyle{\sum_{n=1}^\infty a_n}$
+\begin{enumerate}[ (i) ]
+\item converges absolutely if $l < 1$,
+\item and diverges if $l > 1$
+\end{enumerate}
+
+\subsection{Remark}
+If $l = 1$ or $\displaystyle{l = \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n}\right|}$ fails to exist, then the ratio test gives no information. This is NOT the same as saying that the limit DNE, just that we can't use the ratio test to determine this.
+
+\subsection{Example}
+Determine if the following series converge:
+\begin{enumerate}[ (a) ]
+\item $\displaystyle{\sum_{n=0}^\infty \frac{1}{n!}}$ (factorial series)
+
+\item $\displaystyle{\sum_{n=0}^\infty \frac{2^n}{n}}$
+
+\item $\displaystyle{\sum_{n=0}^\infty \frac{1}{n}}$ (harmonic series)
+\end{enumerate}
+
+\subsection{Solution}
+\begin{enumerate}[ (a) ]
+\item 
+\begin{align*}
+a_n = \frac{1}{n!} \Rightarrow l =  \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n}\right| &= \lim_{n\rightarrow\infty} \left| \frac{\frac{1}{(n+1)!}}{\frac{1}{n!}}\right| \\
+&= \lim_{n\rightarrow\infty} \frac{n!}{(n+1)!} \\
+&= \lim_{n\rightarrow\infty} \frac{1}{n+1} \\
+&= 0
+\end{align*}
+
+This shows that the series $\displaystyle{\sum_{n=0}^\infty \frac{1}{n!}}$ converges.
+
+\item
+\begin{align*}
+a_n = \frac{2^n}{n} \Rightarrow l = \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n}\right| &= \lim_{n\rightarrow\infty} \left| \frac{\frac{2^{n+1}}{n+1}}{\frac{2^n}{n}}\right| \\
+&= \lim_{n\rightarrow\infty} \frac{n}{n+1} \frac{2^{n+1}}{2^n} \\
+&= 2 \lim_{n\rightarrow\infty} \frac{n}{n+1} \\
+&= 2 \lim_{n\rightarrow\infty} \frac{1}{1+\frac{1}{n}} \\
+&= 2 \cdot \frac{1}{1} = 2 > 1
+\end{align*}
+
+Thus, the series $\displaystyle{\sum_{n=0}^\infty \frac{2^n}{n}}$ diverges by the Ratio Test.
+
+\item
+\begin{align*}
+a_n = \frac{1}{n} \Rightarrow l &= \lim_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n}\right| \\
+&= \lim_{n\rightarrow\infty} \frac{\frac{1}{n+1}}{\frac{1}{n}} \\
+&= \lim_{n\rightarrow\infty} \frac{n}{n+1} \\
+&=  \lim_{n\rightarrow\infty} \frac{1}{1 + \frac{1}{n}} = 1
+\end{align*}
+This shows that the Ratio Test gives no information.
+\end{enumerate}
+
+\section{Theorem (Integral Test)}
+Suppose $f(x)$ is continuous, positive and decreasing on $[1, \infty)$.
+\begin{enumerate}[ (i) ]
+\item If $|a_n| \leq f(n),\ n \in \naturals$, and $\displaystyle{\int_1^\infty f(x)\, dx}$ converges, then the series $\displaystyle{\sum_{n=1}^\infty a_n}$ converges absolutely.
+
+\item If $|a_n| \leq f(n),\ n \in \naturals$, and $\displaystyle{\int_1^\infty f(x)\, dx}$ diverges, then the series $\displaystyle{\sum_{n=1}^\infty a_n}$  diverges.
+You can tell this is true if you consider that $\displaystyle{ \sum_{n=1}^N a_n \approx \int_1^N f(x)\, dx }$.
+\end{enumerate}
+
+\subsection{Example}
+Determine if the series $\displaystyle{ \sum_{n=1}^\infty \frac{1}{n} }$ converges or diverges.
+
+\subsection{Solution}
+Let $f(x) = \frac{1}{x}$. Then $f(x)$ is continuous on $[1, \infty)$, decreasing and positive, and
+$$f(n) = \frac{1}{n}$$
+Since $\displaystyle{\int_1^\infty \frac{1}{x} \, dx = \lim_{\varepsilon \rightarrow \infty}  \int_1^\varepsilon \frac{1}{x} \, dx = \lim_{\varepsilon \rightarrow \infty} \left. \ln(x) \right|_1^\varepsilon = \lim_{\varepsilon \rightarrow \infty} \ln(\varepsilon) = \infty }$, we conclude via the integral test that the series $\displaystyle{ \sum_{n=1}^\infty \frac{1}{n} }$ diverges.
+
+\end{document}

@@ -1,0 +1,15 @@
+\contentsline {section}{Basic premise}{1}{section*.2}%
+\contentsline {section}{Theorem (Tails of series)}{1}{section*.3}%
+\contentsline {subsection}{Example}{1}{section*.4}%
+\contentsline {subsection}{Definition}{2}{section*.5}%
+\contentsline {subsection}{Remark}{2}{section*.6}%
+\contentsline {section}{Theorem (Compare Test)}{2}{section*.7}%
+\contentsline {subsection}{Example}{2}{section*.8}%
+\contentsline {subsection}{Solution}{2}{section*.9}%
+\contentsline {section}{Theorem (Ratio Test)}{2}{section*.10}%
+\contentsline {subsection}{Remark}{2}{section*.11}%
+\contentsline {subsection}{Example}{3}{section*.12}%
+\contentsline {subsection}{Solution}{3}{section*.13}%
+\contentsline {section}{Theorem (Integral Test)}{4}{section*.14}%
+\contentsline {subsection}{Example}{4}{section*.15}%
+\contentsline {subsection}{Solution}{4}{section*.16}%
