@@ -23,7 +23,7 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - Comparison Principle: Convergence
 - [Lecture 5](<Lecture 5/Lecture5_notes.pdf>)
   - Comparison Principle: Divergence
-- [Lecture 6](<Lecture 6/Lecture6_notes.pdf>)
+- [Lecture 6](<Lecture 6/Lecture6_notes.pdf>) - Sequences and Series
   - Sequences
   - Limits of Sequences
   - Properties of Limits
@@ -36,7 +36,21 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - Comparison Test
   - Ratio Test
   - Integral Test
-- [Lecture 8](<Lecture 8/Lecture8_notes.pdf>) - Power series
+- [Lecture 8](<Lecture 8/Lecture8_notes.pdf>) - Power Series
   - Radius of convergence
   - General power series
   - Properties of power series
+- [Lecture 9](<Lecture 9/Lecture9_notes.pdf>) - Taylor Series
+  - Taylor's Theorem (§9.4.1)
+  - Taylor Series (§9.4.2)
+- [Lecture 10](<Lecture 10/lecture10_notes.pdf>)
+  - Taylor Series (cont.)
+  - L'Hôpital's Rule (§9.4.3)
+  - Vectors (§4.2.1-4.2.8)
+- [Lecture 11](<Lecture 11/lecture11_notes.pdf>)
+  - Vector products
+  - Lines (§4.3.1)
+- [Lecture 12](<Lecture 12/lecture12_notes.pdf>)
+  - Lines (cont.)
+  - Algebraic/Vector Equation of a Plane (§4.3.3)
+  - Parametric Equation of a Plane

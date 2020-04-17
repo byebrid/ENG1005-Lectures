@@ -1,0 +1,13 @@
+\contentsline {section}{Vector products}{1}{section*.3}%
+\contentsline {subsection}{Scalar (or inner or dot) product}{1}{section*.4}%
+\contentsline {subsection}{Cross product}{2}{section*.5}%
+\contentsline {subsection}{Geometric interpretation}{2}{section*.6}%
+\contentsline {subsection}{Example}{2}{section*.7}%
+\contentsline {subsection}{Solution}{2}{section*.8}%
+\contentsline {section}{Lines §4.3.1}{2}{section*.9}%
+\contentsline {subsection}{Parametric/vector equation}{2}{section*.10}%
+\contentsline {subsection}{Example}{2}{section*.11}%
+\contentsline {subsection}{Solution}{3}{section*.12}%
+\contentsline {subsection}{Algebraic/Cartesian equation}{3}{section*.13}%
+\contentsline {subsection}{Example}{3}{section*.14}%
+\contentsline {subsection}{Solution}{3}{section*.15}%

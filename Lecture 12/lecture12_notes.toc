@@ -1,0 +1,10 @@
+\contentsline {section}{Lines cont.}{1}{section*.2}%
+\contentsline {subsection}{Example}{1}{section*.3}%
+\contentsline {subsection}{Solution}{1}{section*.4}%
+\contentsline {section}{Algebraic/vector equation of a plane §4.3.3}{2}{section*.5}%
+\contentsline {subsection}{m-dimension}{2}{section*.6}%
+\contentsline {subsection}{Example}{2}{section*.7}%
+\contentsline {subsection}{Solution}{3}{section*.8}%
+\contentsline {section}{Parametric equation of a plane}{3}{section*.9}%
+\contentsline {subsection}{Example}{3}{section*.10}%
+\contentsline {subsection}{Solution}{4}{section*.11}%

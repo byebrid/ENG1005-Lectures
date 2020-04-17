@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Symbol for a plane
+\newcommand{\plane}{\mathbb{P}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 12}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section{Lines cont.}
+\subsection{Example}
+Let 
+\[ \vec{r}(t) = \vec{u} + t\vec{w},\ t \in \reals \]
+parametrise a line $\ell$. Show that the line $m$ that connects the origin to the closest point on $\ell$ is orthogonal to $\ell$.
+
+\subsection{Solution}
+\begin{align*}
+\text{Let } d(t) = |\vec{r}(t)|^2 &= \vec{r}(t) \cdot \vec{r}(t) \\
+&= (\vec{u} + t\vec{w}) \cdot (\vec{u} + t\vec{w}) \\
+&= \vec{u} \cdot \vec{u} + t\vec{u} \cdot \vec{w} + t\vec{w} \cdot \vec{u} + t^2\vec{w} \cdot \vec{w} \\
+&= |\vec{u}|^2 + 2t\vec{u}\cdot \vec{w} + t^2|\vec{w}|^2
+\end{align*}
+It's obvious that as $t$ approaches $\pm \infty$, the distance also goes to infinity. Therefore we know there must be some minimum in between.
+
+$d(t)$ has minimum where
+\begin{align*}
+d'(t) = 0 &\Rightarrow 2 \vec{u} \cdot \vec{w} + 2 t |\vec{w}|^2 = 0 \\
+&\Rightarrow t = \frac{-\vec{u} \cdot \vec{w}}{|\vec{w}|^2}
+\end{align*}
+
+This shows that the point $\vec{p}$ on $\ell$ that is closest to $\vec{0}$ is
+\[ \vec{p} = \vec{r} \left( \frac{-\vec{u} \cdot \vec{w}}{|\vec{w}|^2} \right) = \vec{u} - \frac{\vec{u} \cdot \vec{w}}{|\vec{w}|^2} \vec{w} \]
+
+Now we want to show that $\vec{p}$ is orthogonal to $w$. 
+\begin{align*}
+\vec{w} \cdot \vec{p} &= \vec{w} \cdot \left( \vec{u} - \frac{\vec{u} \cdot \vec{w}}{|\vec{w}|^2} \vec{w} \right) \\
+&= \vec{u} \cdot \vec{w} - \frac{\vec{u} \cdot \vec{w}}{|\vec{w}|^2} \vec{w} \cdot \vec{w} \\
+&= \vec{u} \cdot \vec{w} - \frac{\vec{u} \cdot \vec{w}}{|\vec{w}|^2} |\vec{w}|^2 \\
+&= \vec{u} \cdot \vec{w} - \vec{w} \cdot \vec{u} = 0
+\end{align*}
+
+This shows that $\ell \perp m$.
+
+\section{Algebraic/vector equation of a plane §4.3.3}
+A plane $\plane \subset \reals^3$ is determined by
+\begin{enumerate}[ (i) ]
+\item a point $\vec{p} \in \plane$
+\item and a normal vector $\vec{n}$ to the plane.
+\end{enumerate}
+
+So $q \in \plane$ if and only if
+\[ \vec{n} \cdot (\vec{q} - \vec{p}) = 0 \]
+This is known as the algebraic (vector) equation of the plane $\plane$.
+\[ \plane = \{ \vec{q} \in \reals^3\ |\ \vec{n} \cdot (\vec{q} - \vec{p}) = 0 \} \]
+
+Letting
+\[ \vec{n} = (a, b, c),\ \vec{p} = (x_0, y_0, z_0),\ \vec{q} = (x, y, z) \]
+then
+\begin{align*}
+\vec{n} \cdot (\vec{q} - \vec{p}) = 0 &\Leftrightarrow (a, b, c) \cdot (x-x_0, y-y_0, z-z_0) = 0 \\
+&\Leftrightarrow a(x-x_0) + b(y-y_0) + c(z-z_0) = 0
+\end{align*}
+Note that it's easy to read the normal vector $\vec{n}$ from this as $\vec{n}=(a,b,c)$
+
+\subsection{m-dimension}
+The same equation
+\[ \vec{n} \cdot (\vec{q} - \vec{p}) = 0 \hspace{2cm} (\vec{n} = (n_1, n_2, ..., n_m),\ \vec{p} = (p_1, p_2, ..., p_m),\ \vec{q} = (x_1, x_2, ..., x_m) \]
+also describe a (hyper) plane in $m$-dimension	, $m \in \naturals$.
+
+\subsection{Example}
+Find the algebraic equation of the plane $\plane$ that contains the points $(1, 3, 2),\ (3, -1, 6)$ and $(5, 2, 0)$.
+
+\subsection{Solution}
+Remember that, to describe a plane, we need one point (we have 3!) and we need a normal vector.
+\[ \text{Let } \vec{a} = \vec{p_2} -\vec{p_1},\ \vec{b} = \vec{p_3} - \vec{p_1} \]
+where $\vec{p_1}=(1, 3, 2),\ \vec{p_2}=(3, -1, 6),\ \vec{p_3}=(5, 2, 0)$
+
+We can find a normal vector with $\vec{n} = \vec{a} \times \vec{b}$.
+
+So
+\[ \vec{a} = (3, -1, 6) - (1, 3, 2) = (2, -4, 4) \]
+\[ \vec{b} = (5, 2, 0) - (1, 3, 2) = (4, -1, -2) \]
+and
+\begin{align*}
+\vec{n} = \vec{a} \times \vec{b} &= (-4\cdot(-2) - 4 \cdot(-1), 4\cdot4 - 2\cdot(-2), 2\cdot(-1) - (-4)\cdot 4 \\
+&= (12, 20, 14) \hspace{4cm} \text{(who knows if I wrote that down correctly, I don't care)}
+\end{align*}
+
+This the equation of the plane is
+\[ \vec{n} \cdot (\vec{q} - \vec{p} = 0 \]
+\[ \Leftrightarrow \]
+\begin{align*}
+(12, 20, 14) \cdot ((x, y, z) - (1, 3, 2)) = 0 \\
+\Rightarrow (12, 20, 14) \cdot ((x-1, y-3, z-2)) = 0 \\
+\Rightarrow 12(x-1) + 20(y-3) + 14(z-2) = 0
+\end{align*}
+
+\section{Parametric equation of a plane}
+Suppose $\vec{p}_1, \vec{p}_2, \vec{p}_3 \in \plane$, and let
+\[ \vec{a} = \vec{p}_2 - \vec{p}_1 \]
+\[ \vec{b} = \vec{p}_3 - \vec{p}_1 \]
+
+Then any point $\vec{q} \in \plane$ can be written as 
+\[ \vec{q} = \vec{p}_1 + u \vec{a} + v\vec{b} \Leftrightarrow \vec{q} - \vec{p}_1 = u \vec{a} + v\vec{b} \]
+for some numbers $u, v \in \reals$.
+
+The equation
+\[ \vec{q}(u, v) = \vec{p}_1 + u \vec{a} + v\vec{b},\ u, v \in \reals \]
+is called the parametric equation of the plane $\plane$, while
+\[ \plane = \{ \vec{q}(u, v)\ |\ u,v \in \reals \} \]
+
+\subsection{Example}
+Find the parametric representation of the plane passing through the points
+\[ (1, 3, 2),\ (3, -1, 6),\ (5, 2, 0) \]
+
+\subsection{Solution}
+Set
+\[ \vec{p}_1 = (1, 3, 2),\ \vec{p}_2=(3, -1, 6),\ \vec{p}_3(5, 2, 0)\]
+We let
+\[ \vec{a} = \vec{p}_2 - \vec{p}_1 = (2, -4, 4) \]
+\[ \vec{b} = \vec{p}_3 - \vec{p}_1 = (4, -1, -2) \]
+From these, we see that the parametrised equation of the plane is
+\begin{align*}
+\vec{q}(u, v) &= \vec{p_1} + u\vec{a} + v\vec{b} \\
+&= (1, 3, 2) + u(2, -4, 4) + v(4, -1, -2) \\
+&= (1 + 2u + 4v, 3 - 4u - v, 2 + 4u - 2v) \\
+\Rightarrow \vec{q}(u,v) &= (1 + 2u + 4v, 3 - 4u - v, 2 + 4u - 2v),\ u,v \in \reals
+\end{align*}
+\end{document}

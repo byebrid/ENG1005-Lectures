@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 11}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+Click \href{https://echo360.org.au/lesson/G_32340f5d-ff38-43d2-be9d-d88ddb1b3611_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-04-08T14:58:00.000_2020-04-08T15:53:00.000/classroom#sortDirection=desc}{here} for a recording of the lecture.
+
+\section{Vector products}
+\subsection{Scalar (or inner or dot) product}
+\begin{align*}
+\vec{u} \cdot \vec{v} &= (u_1, u_2, u_3) \cdot (v_1, v_2, v_3) \\
+&= u_1v_1 + u_2v_2 + u_3v_3 & \text{(a scalar)}
+\end{align*}
+This is equivalent to
+\[ \vec{u} \cdot \vec{v} = |\vec{u}||\vec{v}| \cos(\theta) \]
+
+Where $|\vec{u}|$ is known as the norm, length or magnitude of $\vec{u}$.
+\[ |\vec{u}| = \sqrt{\vec{u} \cdot \vec{u}} = \sqrt{u_1^2 + u_2^2 + u_3^2} \]
+
+\subsection{Cross product}
+\begin{align*}
+\vec{u} \times \vec{v} &= (u_1, u_2, u_3) \times (v_1, v_2, v_3) \\
+&= (u_2v_3 - u_3v_2, u_3v_1 - u_1v_3, u_1v_2 - u_2v_1) \\ 
+&= (u_2v_3 - u_3v_2)\ihat + (u_3v_1 - u_1v_3)\jhat + (u_1v_2 - u_2v_1)\khat
+\end{align*}
+
+\subsection{Geometric interpretation}
+<MAYBE INSERT PICTURE HERE>
+We can note that the cross product of 2 vectors $\vec{u}, \vec{v}$ is perpendicular to the plane on which both vectors lie.
+\begin{enumerate}[ a) ]
+\item $\vec{u} \times \vec{v} = |\vec{u}||\vec{v}| \sin(\theta)\vec{n}$, where $\vec{n}$ is that normal vector (and is a unit vector!).
+
+Note that vectors are perpendicular/orthogonal ($\vec{u} \perp \vec{v}$) if and only if their dot product is \textbf{zero}. 
+
+Also note that, in the case of the cross product, $\vec{n} \perp \vec{u}$ and $\vec{n} \perp \vec{v}$. It then also follows that $\vec{n} \cdot \vec{u} = \vec{n} \cdot \vec{v} = 0$.
+\item $\vec{u} \times \vec{v} = 0 = \vec{u} \times \vec{v} \cdot \vec{v}$\hspace{2cm} $(\vec{u} \times \vec{v} \perp \vec{u}\ \&\ \vec{v})$
+\item $|\vec{u} \times \vec{v}| = |\vec{u}||\vec{v}|\sin(\theta)$ <MAYBE INSERT PICTURE HERE OF PARALLELOGRAM>
+\end{enumerate}
+
+\subsection{Example}
+Compute $\vec{u} \times \vec{v}$, where $\vec{u}=(1,2,3)$ and $\vec{v} = (4, -3, 2)$
+
+\subsection{Solution}
+\begin{align*}
+\vec{u} \times \vec{v} &= (u_2v_3 - u_3v_2, u_3v_1 - u_1v_3, u_1v_2 - u_2v_1) \\ 
+&= (2 \cdot 2 - 3 \cdot (-3), 3 \cdot 4 - 1 \cdot 2, 1 \cdot (-3) - 2 \cdot 4) \\
+&= (13, 10, -11)
+\end{align*}
+
+You could then verify this is true by checking that:
+
+$\vec{u} \times \vec{v} \cdot \vec{u} = 0$ \& $\vec{u} \times \vec{v} \cdot \vec{v} = 0$
+
+\section{Lines §4.3.1}
+\subsection{Parametric/vector equation}
+<MAYBE INSERT PICTURE HERE>
+Basically, if we have two vectors representing points, we have the vector from one point to the other being $\vec{w} = \vec{v} - \vec{u}$. \\
+$\vec{r}(t) = \vec{u} + t(\vec{v} - \vec{u})$\\
+So $\vec{r}(0) = \vec{u}, r(1)=\vec{v}$. This gives us some function $\vec{r}(t)$ that lies between $\vec{u}$ and $\vec{v}$ for $0 \leq t \leq 1$ (note that $t$ can be any real number if you want).
+
+$l = \{ \vec{r}(t) | -\infty < t < \infty \}$ \hspace{2cm} (line)
+
+\subsection{Example}
+Find the parametric equation of the line passing through $(1, 2, 3)$ and $(-1, 3, -2)$.
+
+\subsection{Solution}
+Let $\vec{u} = (1, 2, 3)$ and $\vec{v} = (-1, 3, -2)$.\\
+We then set
+\[ \vec{w} = \vec{v} - \vec{u} = (-1, 3, -2) - (1, 2, 3) = (-2, 1, -5) \]
+Thus the parametric equation of the line is
+\[ \vec{r}(t) = \vec{u} + t\vec{w} = (1, 2, 3) + t(-2, 1, -5),\ t \in \reals \]
+\[ \Leftrightarrow \]
+\[ \vec{r}(t) = (1-2t, 2+t, 3-5t),\ t \in \reals\]
+
+\subsection{Algebraic/Cartesian equation}
+Let $\vec{r}(t) = \vec{u} + t\vec{w},\ t \in \reals$ parametrise a line $l$. Then
+\begin{align*}
+\vec{x} = (x_1, x_2, x_3) \in l &\Leftrightarrow \vec{x} = \vec{r}(t) \text{ for some } t \in \reals \\
+&\Leftrightarrow (x_1, x_2, x_3) = (u_1, u_2, u_3) + t(w_1, w_2, w_3) \\
+&\Leftrightarrow (x_1, x_2, x_3) = (u_1 + tw_1, u_2 + tw_2, u_3 + tw_3) \\
+&\Leftrightarrow (x_1, x_2, x_3) = u_i + tw_i,\ i=1,2,3 \\
+&\Leftrightarrow \frac{x_i - u_i}{w_i} = t, \ i=1,2,3\ (w_i \not= 0) \\
+&\Leftrightarrow \frac{x_1 - u_1}{w_1} = \frac{x_2 - u_2}{w_2} = \frac{x_3 - u_3}{w_3}
+\end{align*}
+which is the algebraic equation of the line. This shows that we can determine the points that lie on a line $l$ passing through the vectors $\vec{u}$ and $\vec{v}=\vec{u}+\vec{w}$ by solving
+\[ \frac{x_1 - u_1}{w_1} = \frac{x_2 - u_2}{w_2} = \frac{x_3 - u_3}{w_3} \]
+
+\textbf{Note:} If $w_1 = 0$,
+\[ x_1=u_1,\ \frac{x_2 - u_2}{w_2} = \frac{x_3 - u_3}{w_3} \]
+
+\subsection{Example}
+Find the algebraic equation of the line that passes through the points $(-1, 2, -1)$ and $(1, 1, 1)$.
+
+\subsection{Solution}
+Set $\vec{u} = (-1, 2, -1)$ and $\vec{v} = (1, 1, 1)$.\\
+Then
+\[ \vec{w} = \vec{v} - \vec{u} = (1, 1, 1) - (-1, 2, -1) = (2, -1, 2) \]
+So the algebraic equation of the line is
+\[ \frac{x+1}{2} = \frac{y-2}{-1} = \frac{z+1}{2} \]
+
+\end{document}

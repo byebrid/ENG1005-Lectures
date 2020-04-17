@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 10}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+Click \href{https://echo360.org.au/lesson/G_8402119b-734b-4e1e-a3b4-7e907e86ddba_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-04-07T15:58:00.000_2020-04-07T16:53:00.000/classroom#sortDirection=desc}{here} for a recording of the lecture.
+
+\section{Taylor series}
+\subsection{Example}
+Find the Taylor series for $\ln(x)$ about $x=1$ and determine the interval of convergence.
+
+\subsection{Solution}
+\[ f(x) = \sum_{k=0}^\infty \frac{1}{k!} f^{(k)}(x_0)(x-x_0)^k , f(x) = \ln(x) \]
+
+\[ \frac{d}{dx}\ln(x) = \frac{1}{x},  \frac{d^2}{dx^2}\ln(x) = \frac{-1}{x^2}, \frac{d^3}{dx^3}\ln(x) = \frac{2}{x^3}, \frac{d^4}{dx^4}\ln(x) = \frac{-6}{x^4} \]
+
+\[ \Rightarrow \frac{d^k}{dx^k}\ln(x) =(-1)^{k-1} \frac{(k-1)!}{x^k} ,\ k=1,2,3,... \]
+
+\[ \ln(1) = 0,\ \left. \frac{d^k}{dx^k}\ln(x) \right|_{x=1} = (-1)^{k-1} (k-1)! \]
+
+So the Taylor series for $\ln(x)$ about $x=1$ is
+\begin{align*}
+\sum_{k=1}^\infty \frac{1}{k!} (-1)^{k-1} (k-1)!(x-1)^k &= \sum_{k=1}^\infty \frac{(-1)^{k-1}}{k} (x-1)^k
+\end{align*}
+%*& (\text{note k goes from 1 since we know \ln(
+
+The radius of convergence is given by
+\[
+r = \lim_{k\rightarrow\infty} \left| \frac{\frac{(-1)^{k-1}}{k}}{\frac{(-1)^k}{k+1}} \right| *= \lim_{k\rightarrow\infty} \frac{k+1}{k} = \lim_{k\rightarrow\infty} \left( 1 + \frac{1}{k} \right) = 1
+\]
+
+We conclude that the series converges uniformly for
+\[ |x-1| < 1 \Leftrightarrow 0 < x < 2 \]
+
+\subsection{Fact}
+\[ \ln(x) = \sum_{n=1}^\infty \frac{(-1)^{n-1)}}{n} (x-1)^n, 0 < x \leq 2 \]
+
+What happens for x > 2? Try calculating the Taylor series for $\ln(x)$ about $x=3$.
+
+\section{L'Hôpital's rule §9.4.3}
+Suppose $f(x)$ and $g(x)$ satisfy
+\begin{enumerate}[ (i) ]
+\item $f''(x)$ and $g''(x)$ are continuous on $|x-x_0| < r$
+\item $f(x_0)=g(x_0)=0$ but $g'(x_0) \not= 0$.
+\end{enumerate}
+
+Then
+\[ \lim_{x\rightarrow x_0} \frac{f(x)}{g(x)} =  \lim_{x\rightarrow x_0} \frac{ f(x_0) + f'(x_0)(x-x_0) + (x-x_0)^2 R_2^f(x) }{ g(x_0) + g'(x_0)(x-x_0) + (x-x_0)^2 R_2^g(x) }   \]
+We know $f(x_0)=g(x_0)=0$ and $g'(x_0) \not= 0$ so dividing both numerator and denominator by $(x-x_0)$ gives us
+\[ \lim_{x\rightarrow x_0} \frac{f(x)}{g(x)} = \lim_{x\rightarrow x_0} \frac{f'(x_0)(x-x_0) + (x-x_0) R_2^f(x) }{ g'(x_0) + (x-x_0) R_2^g(x) } \]
+And since $\lim_{x\rightarrow x_0} (x-x_0) = 0$, we get
+\[ \lim_{x\rightarrow x_0} \frac{f(x)}{g(x)} = \frac{f'(x_0)}{g'(x_0)} = \lim_{x\rightarrow x_0} \frac{f'(x)}{g'(x)} \]
+
+\subsection{Example}
+Compute 
+\[ \lim_{x\rightarrow 0} \frac{\sin(x)}{x} \]
+% Note it's '0÷0'
+
+\subsection{Solution}
+\[ \lim_{x\rightarrow 0 } \frac{\sin(x)}{x} = \lim_{x	\rightarrow 0 } \frac{\sin '(x))}{x'} = \lim_{x\rightarrow0} \frac{\cos(x)}{1} = 1 \]
+
+\subsection{Example}
+What is $\displaystyle{\lim_{x\rightarrow 0 } \frac{e^x-1}{x}}$?
+
+\subsection{Solution}
+\[ \lim_{x\rightarrow 0 } \frac{e^x-1}{x} = \lim_{x\rightarrow 0 } \frac{\frac{d}{dx} \left( e^x-1 \right)}{\frac{d}{dx}(x)} \lim_{x\rightarrow 0 } \frac{e^x}{1} = 1 \]
+
+\subsection{Remark}
+L'Hôpital's rule $\displaystyle{\lim_{x\rightarrow x_0 } \frac{f(x)}{g(x)} = \lim_{x\rightarrow x_0 } \frac{f'(x)}{g'(x)}}$ remains valid for:
+\begin{enumerate}[ (i) ]
+\item one sided limits, $x \rightarrow x_0^\pm$
+\item infinite limits, $x \rightarrow \pm \infty$
+\item $\displaystyle{\frac{\infty}{\infty}}$ limits, i.e. $\displaystyle{\lim_{x \rightarrow x_0}} f(x) = \pm \infty$
+\end{enumerate}
+
+\subsection{Example}
+Compute
+\[ \lim_{x \searrow 0} x \ln(x) \]
+
+\subsection{Solution}
+\begin{align*}
+\lim_{x \searrow 0} x \ln(x) &= \lim_{x \searrow 0} \frac{\ln(x)}{\frac{1}{x}} & (\frac{\infty}{\infty}) \\
+&= \lim_{x \searrow 0} \frac{\ln'(x)}{(\frac{1}{x})'} \\
+&= \lim_{x \searrow 0} \frac{\frac{1}{x}}{\frac{-1}{x^2}} \\
+&= \lim_{x \searrow 0} (-x) \\
+&= 0
+\end{align*}
+
+\section{Vectors §4.2.1 - 4.2.8}
+\subsection[Vectors in R3]{Vectors in $\reals^3$}
+$\underline{u} = (u_1, u_2, u_3)$, ($\vec{u} = (u_1, u_2, u_3)$)
+
+\subsection{Standard basis}
+$\vec{i} = \underline{e}_1 = (1, 0, 0)$
+$\vec{j} = \underline{e}_2 = (1, 0, 0)$
+$\vec{k} = \underline{e}_3 = (1, 0, 0)$
+
+\subsection{n-dimensions}
+\begin{align*}
+\underline{u} &= (u_1, u_2, u_3, ..., u_n) \\
+\underline{e}_i &= (0, 0, ..., 0, 1, 0, ..., 0) & (\text{1 at } i^{\text{th}} \text{ position}) \\
+\underline{u} &= \sum_{i=1}^n u_i\,\underline{e}_i
+\end{align*}
+
+\subsection{Expansion in the standard basis}
+\begin{align*}
+\underline{u} &= (u_1, u_2, u_3) \\
+&= u_1(1, 0, 0) + u_2(0, 1, 0) + u_3(0, 0, 1) \\
+&= u_1 \underline{i} + u_2\underline{j} + u_3\underline{k} \\
+\end{align*}
+
+
+\end{document}

@@ -1,0 +1,17 @@
+\contentsline {section}{Taylor series}{1}{section*.3}%
+\contentsline {subsection}{Example}{1}{section*.4}%
+\contentsline {subsection}{Solution}{1}{section*.5}%
+\contentsline {subsection}{Fact}{2}{section*.6}%
+\contentsline {section}{L'Hôpital's rule §9.4.3}{2}{section*.7}%
+\contentsline {subsection}{Example}{2}{section*.8}%
+\contentsline {subsection}{Solution}{3}{section*.9}%
+\contentsline {subsection}{Example}{3}{section*.10}%
+\contentsline {subsection}{Solution}{3}{section*.11}%
+\contentsline {subsection}{Remark}{3}{section*.12}%
+\contentsline {subsection}{Example}{3}{section*.13}%
+\contentsline {subsection}{Solution}{3}{section*.14}%
+\contentsline {section}{Vectors §4.2.1 - 4.2.8}{3}{section*.15}%
+\contentsline {subsection}{Vectors in R3}{3}{section*.16}%
+\contentsline {subsection}{Standard basis}{3}{section*.17}%
+\contentsline {subsection}{n-dimensions}{4}{section*.18}%
+\contentsline {subsection}{Expansion in the standard basis}{4}{section*.19}%
