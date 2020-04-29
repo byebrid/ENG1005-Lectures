@@ -1,0 +1,15 @@
+\contentsline {section}{Matrix operations continued}{1}{section*.3}%
+\contentsline {subsection}{Transposition}{1}{section*.4}%
+\contentsline {subsection}{Example}{1}{section*.5}%
+\contentsline {section}{Properties of matrix operations §5.2.6}{2}{section*.6}%
+\contentsline {subsection}{Remark}{2}{section*.7}%
+\contentsline {subsection}{Example}{2}{section*.8}%
+\contentsline {subsection}{Example}{2}{section*.9}%
+\contentsline {section}{Matrix formulation of linear equations §5.5}{3}{section*.10}%
+\contentsline {subsection}{Terminology}{3}{section*.11}%
+\contentsline {section}{Rank §5.6}{3}{section*.12}%
+\contentsline {subsection}{Example}{3}{section*.13}%
+\contentsline {section}{The solutions space for linear systems of equations}{4}{section*.14}%
+\contentsline {subsection}{Theorem}{4}{section*.15}%
+\contentsline {section}{LU decomposition}{4}{section*.16}%
+\contentsline {subsection}{Definition}{4}{section*.17}%

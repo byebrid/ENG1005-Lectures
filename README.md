@@ -54,3 +54,25 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - Lines (cont.)
   - Algebraic/Vector Equation of a Plane (§4.3.3)
   - Parametric Equation of a Plane
+- [Lecture 13](<Lecture 13/lecture13_notes.pdf>)
+  - Linear systems of equations (§5.5, 5.5.2)
+  - Elementary row operations (§5.2.2)
+  - Matrices (§5.2.1)
+  - Gaussian elimination (§5.5.2)
+- [Lecture 14](<Lecture 14/lecture14_notes.pdf>)
+  - Gaussian elimination - continued
+  - Row echelon form (§5.6)
+  - Gauss-Jordan elimination (§5.5.2)
+  - Reduced row echelon form (§5.6)
+  - Matrix operations (§5.2.2, 5.2.4)
+- [Lecture 15](<Lecture 15/lecture15_notes.pdf>)
+  - Matrix operations - continued
+  - Properties of matrix operations (§5.2.6)
+  - Matrix formulation of linear equations (§5.5)
+  - Rank (§5.6)
+  - The solutions space for linear systems of equations
+  - LU decomposition
+- [Lecture 16](<Lecture 16/lecture16_notes.pdf>)
+  - LU decomposition - continued
+  - Determining the LU decomposition
+  - Matrix inversion (§5.4)

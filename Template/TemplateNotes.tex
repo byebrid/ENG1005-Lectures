@@ -13,6 +13,10 @@
 % Turns table of contents, \refs, etc. into hyperlinks
 \usepackage{hyperref}
 
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
 % Common sets
 \newcommand{\integers}{\mathbb{Z}}
 \newcommand{\naturals}{\mathbb{N}}
@@ -33,6 +37,14 @@
 
 % Allows us to number equations in \begin{align} statements, etc.
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
 
 % NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
 \setcounter{secnumdepth}{0} % sections are level 1

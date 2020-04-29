@@ -1,0 +1,6 @@
+\contentsline {section}{Linear systems of equations §5.5, 5.5.2}{1}{section*.3}%
+\contentsline {subsection}{Definition}{2}{section*.5}%
+\contentsline {section}{Elementary row operations §5.2.2}{3}{section*.7}%
+\contentsline {section}{Matrices §5.2.1}{3}{section*.8}%
+\contentsline {subsection}{Definition}{4}{section*.9}%
+\contentsline {section}{Gaussian elimination §5.5.2}{4}{section*.10}%

@@ -1,0 +1,8 @@
+\contentsline {section}{LU decomposition - continued}{1}{section*.3}%
+\contentsline {section}{Determining the LU decomposition}{1}{section*.4}%
+\contentsline {subsection}{Remark}{2}{section*.5}%
+\contentsline {subsection}{Example}{2}{section*.6}%
+\contentsline {subsection}{Example}{3}{section*.7}%
+\contentsline {subsection}{Solution}{3}{section*.8}%
+\contentsline {section}{Matrix inversion §5.4}{4}{section*.9}%
+\contentsline {subsection}{Definition}{4}{section*.10}%

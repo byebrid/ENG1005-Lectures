@@ -1,0 +1,360 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 14}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+Click \href{https://echo360.org.au/lesson/G_32340f5d-ff38-43d2-be9d-d88ddb1b3611_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-04-22T14:58:00.000_2020-04-22T15:53:00.000/classroom#sortDirection=desc}{here} for a recording of the lecture.
+
+\section{Gaussian elimination §5.5.2 - continued}
+\subsection{Example - continued}
+\begin{enumerate}[ (i) ]
+\item Getting matrix into row echelon form.
+\[
+\begin{bmatrix}[ccc|c]
+2 & -1 & 1 & 1 \\
+1 & 2 & -1 & -1 \\
+-1 & -1 & -1 & 2
+\end{bmatrix}
+\]
+\[ \vdots \text{ (see previous lecture notes) }\]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 2 & -1 & -1 \\
+0 & 1 & -2 & 1 \\
+0 & 0 & -7 & 8
+\end{bmatrix}
+\]
+\[ R_3 \rightarrow -\frac{1}{7}R_3 \]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 2 & -1 & -1 \\
+0 & 1 & -2 & 1 \\
+0 & 0 & 1 & -\frac{8}{7}
+\end{bmatrix}
+\]
+Our augmented matrix is now in \textbf{row echelon form}. This means we have that diagonal of 1s, called \textbf{pivots}, and zeros beneath them.
+
+\item Back substitution.
+\[ z = -\frac{8}{7} \Rightarrow y = 2z + 1 = -\frac{16}{7} + 1 = -\frac{9}{7}\]
+\[ \Rightarrow x = -1 - 2y + z = -1 + \frac{18}{7} - \frac{8}{7} = \frac{3}{7} \]
+
+\end{enumerate}
+
+\section{Row echelon form §5.6}
+\subsection{Definition}
+A matrix is in row echelon form if
+\begin{enumerate}[ (i) ]
+\item all rows with a non-zero element are above any rows with all zero,
+\item and the leading coefficient of each row (i.e. first non-zero number in row) is 1 (the \textbf{pivot}) and is to the left of all leading coefficients in the rows below.
+\end{enumerate}
+
+\subsection{Examples}
+\begin{enumerate}[ (a) ]
+\item
+\[
+\begin{bmatrix}
+1 & 2 & 1 & 0 & 5 \\
+0 & 0 & 1 & -4 & 0 \\
+0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}
+\]
+This is in fact in row echelon form!
+
+\item
+\[
+\begin{bmatrix}
+1 & 7 & 3 & 4 \\
+0 & 1 & 0 & 5 \\
+5 & 0 & 1 & 0
+\end{bmatrix}
+\]
+Note that (1, 1) is not above all zeros (because of the 5), and also that (3, 1) = 5 is a leading coefficient that isn't 1! This is NOT in row echelon form.
+
+\[
+\begin{bmatrix}
+0 & 0 & 0 \\
+1 & 3 & 2 \\
+4 & 1 & 0 
+\end{bmatrix}
+\]
+Problems include that the first row is all zeros and the last row's leading coefficient is not 1. This is NOT in row echelon form.
+
+\end{enumerate}
+
+\subsection{Remark}
+When using Gaussian elimination to solve a linear system of equations the row-reduction (i.e. elimination) process stops when the augmented matrix is in row echelon form. At that point, back substitution is used recursively to find the solution.
+
+\section{Gauss-Jordan elimination §5.5.2}
+\begin{align*}
+2x - y + z &= 1 \\
+x + 2y - z &= -1 \\
+-x - y - z &= 2
+\end{align*}
+
+Last time, we stopped row-reduction when the augmented matrix 
+\[
+\begin{bmatrix}[ccc|c]
+2 & -1 & 1 & 1 \\
+1 & 2 & -1 & -1 \\
+-1 & -1 & -1 & 2
+\end{bmatrix}
+\]
+reached the following row echelon form
+\[
+\begin{bmatrix}[ccc|c]
+1 & 2 & -1 & -1 \\
+0 & 1 & -2 & 1 \\
+0 & 0 & 1 & -\frac{8}{7}
+\end{bmatrix}
+\]
+\[ R_2 \rightarrow R_2 + 2R_3 \]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 2 & -1 & -1 \\
+0 & 1 & 0 & -\frac{9}{7} \\
+0 & 0 & 1 & -\frac{8}{7}
+\end{bmatrix}
+\]
+\[ R_1 \rightarrow R_1 + R_3 \]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 2 & 0 & -\frac{15}{7} \\
+0 & 1 & 0 & -\frac{9}{7} \\
+0 & 0 & 1 & -\frac{8}{7}
+\end{bmatrix}
+\]
+\[ R_1 \rightarrow R_1 - 2R_2\]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 0 & 0 & \frac{3}{7} \\
+0 & 1 & 0 & -\frac{9}{7} \\
+0 & 0 & 1 & -\frac{8}{7}
+\end{bmatrix}
+\]
+Now, the matrix above is in \textbf{reduced row echelon form}.
+\[ \Rightarrow (x, y, z) = \left( \frac{3}{7}, -\frac{9}{7}, -\frac{8}{7} \right) \]
+
+\section{Reduced row echelon form §5.6}
+\subsection{Definition}
+A matrix $A$ is in reduced row echelon form if it is in row echelon form and any column with a pivot has zeros elsewhere.
+
+\subsection{Examples}
+\begin{enumerate}[ (a) ]
+\item 
+\[
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+This is in row echelon form, and since everything else is zeros, this is in reduced row echelon form.
+
+\item
+\[
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 2 \\
+0 & 0 & 1 \\ 
+\end{bmatrix}
+\]
+This is in row echelon form but is NOT in reduced row echelon form.
+
+\item 
+\[
+\begin{bmatrix}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 1 \\ 
+\end{bmatrix}
+\]
+This is NOT in reduced row echelon form nor row echelon form.
+
+\item
+\[
+\begin{bmatrix}
+0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\]
+Similarly, this one is not even in row echelon form and so cannot be in reduced row echelon form.
+
+\end{enumerate}
+
+\subsection{Remark}
+The Gauss-Jordan eliminations process terminates when the augmented matrix in in reduced row echelon form.
+
+\subsection{Example}
+\begin{align*}
+x + 3y - z &= 1 \\
+2x + 4y + 2z &= 1 \\
+-3x - 9y + 3z &= -3 \\
+\end{align*}
+
+First, make the augmented matrix.
+\[
+\begin{bmatrix}[ccc|c]
+1 & 3 & -1 & 1 \\
+2 & 4 & 2 & 1 \\
+-3 & -9 & 3 & -3 \\
+\end{bmatrix}
+\]
+\[ R_2 \rightarrow R_2 - 2R_1 \]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 3 & -1 & 1 \\
+0 & -2 & 4 & -1 \\
+-3 & -9 & 3 & -3 \\
+\end{bmatrix}
+\]
+\[ R_3 \rightarrow R_3 + 3R_1 \]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 3 & -1 & 1 \\
+0 & -2 & 4 & -1 \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix}
+\]
+\[ R_2 \rightarrow -\frac{1}{2}R_2 \]
+\[
+\begin{bmatrix}[ccc|c]
+1 & 3 & -1 & 1 \\
+0 & 1 & -2 & \frac{1}{2} \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix}
+\]
+Which translates back into
+\begin{align*}
+x + 3y - z &= 1 \\
+y - 2z = \frac{1}{2}
+\end{align*}
+Note that $z$ can be any real number, so set $z = \lambda,\ \lambda \in \reals$. We then proceed by back-substitution.
+\[ z = \lambda \Rightarrow y = 2z + \frac{1}{2} = 2\lambda + \frac{1}{2} \]
+\[ \Rightarrow x = z - 3y + 1 = \lambda - 3 \left( 2\lambda + \frac{1}{2} \right) + 1 = -5\lambda -\frac{1}{2} \]
+Thus
+\[ (x, y, z) = \left( -5\lambda -\frac{1}{2}, 2\lambda + \frac{1}{2}, \lambda \right)\]
+is a 1-parameter family of solutions.
+
+\section{Matrix operations §5.2.2, 5.2.4}
+\subsection{Addition}
+\[ [A_{ij}] + [B_{ij}] = [A_{ij} + B{ij}] \]
+Note, both $A$ and $B$ must be $m \times n$ matrices, and the result will be of the same size.
+
+\subsection{Example}
+\[ 
+\begin{bmatrix}
+1 & -1 \\
+2 & 4
+\end{bmatrix}
++ \begin{bmatrix}
+3 & 1 \\
+-1 & 2
+\end{bmatrix}
+= \begin{bmatrix}
+1 + 3 & -1 + 1 \\
+2 + (-1) & 4 + 2
+\end{bmatrix}
+= \begin{bmatrix}
+4 & 0 \\
+1 & 6
+\end{bmatrix}
+\]
+
+\subsection{Scalar multiplication}
+\[ \lambda [A_{ij}] = [\lambda A_{ij}] \]
+
+\subsection{Example}
+\[
+3 \begin{bmatrix}
+1 & 2 & -1 \\
+4 & 0 & 3
+\end{bmatrix}
+= \begin{bmatrix}
+3 \times 1 & 3 \times 2 & 3 \times (-1) \\
+3 \times 4 & 3 \times 0 & 3 \times 3
+\end{bmatrix}
+= \begin{bmatrix}
+3 & 6 & -3 \\
+12 & 0 & 9
+\end{bmatrix}
+\]
+
+\subsection{Matrix multiplication}
+\[ [A_{ij}] [B_{jk}] = [C_{ik}] \]
+where
+\[ C_{ik} = \sum_{j=1}^n A_{ij}B_{jk},\ 1 \leq i \leq m,\ 1 \leq k \leq p \]
+Note that $A$ is an $m \times n$ matrix, and that $B$ must be a $n \times p$ matrix. The result will therefore be a $m \times p$ matrix.
+
+\subsection{Example}
+\[
+\begin{bmatrix}
+1 & 2 \\
+-1 & -2
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 & 0 \\
+-1 & -1 & 3
+\end{bmatrix}
+= \begin{bmatrix}
+1 \times 1 + 2 \times (-1) & 1 \times 2 + 2 \times (-1) & 1 \times 0 + 2 \times 3 \\
+(-1) \times 1 + (-2) \times (-1) & (-1) \times 2 + (-2) \times (-1) & (-1) \times 0 + (-2) \times 3
+\end{bmatrix}
+= \begin{bmatrix}
+-1 & 0 & 6 \\
+1 & 0 & -6
+\end{bmatrix}
+\]
+
+\end{document}

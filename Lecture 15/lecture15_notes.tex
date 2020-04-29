@@ -1,0 +1,278 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 15}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+Click \href{https://echo360.org.au/lesson/G_35fe23e0-41ee-4e6f-b0f5-05f4155bb7b0_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-04-23T15:58:00.000_2020-04-23T16:53:00.000/classroom#sortDirection=desc}{here} for a recording of the lecture.
+
+\section{Matrix operations continued}
+\subsection{Transposition}
+\[ [A_{ij}]^T = [A_{ji}] \]
+This means the transposition of an $m \times n$ matrix is an $n \times m$ matrix.
+
+\subsection{Example}
+\[
+\begin{bmatrix}
+0 & 1 & 2 \\
+-3 & 4 & 6
+\end{bmatrix}
+= \begin{bmatrix}
+0 & -3 \\
+1 & 4 \\
+2 & 6
+\end{bmatrix}
+\]
+
+\section{Properties of matrix operations §5.2.6}
+\begin{enumerate}[ (i) ]
+\item $(AB)C = A(BC)$ (associative)
+\item $(A + B)C = AC + BC$ (distributive)\\
+This also works with scalars: $\lambda(B + C) = \lambda B + \lambda C$
+
+\subsection{Remark}
+In general, matrix multiplication is not commutative,
+\[ AB \not = BA \]
+
+\subsection{Example}
+\[
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 \\
+0 & -1
+\end{bmatrix}
+= \begin{bmatrix}
+0 & -1 \\
+1 & 0
+\end{bmatrix}
+\]
+But if you switch the matrics around, you instead get
+\[
+\begin{bmatrix}
+1 & 0 \\
+0 & -1
+\end{bmatrix}
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+= \begin{bmatrix}
+0 & 1 \\
+-1 & 0
+\end{bmatrix}
+\]
+So you can see that the order in which you multiply matrices does matter.
+
+\item $(AB)^T = B^T A^T$
+
+\item The matrix
+\[ \mathbb{I}_n = (\delta_{ij}),\ 1 \leq i, j \leq n \]
+Note: $\delta_{ij}$ is the Kronecker delta and is defined as
+\[ \delta_{ij} = \begin{cases}
+  1 \text{ if } i = j, \\
+  0 \text{ if } i \not = j
+\end{cases}
+\]
+
+\subsection{Example}
+\[ \mathbb{I}_3 = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\]
+\end{enumerate}
+
+If $A$ is an $m \times n$ matrix and $B$ is an $n \times p$ matrix, then
+\[ A \mathbb{I}_n = A \]
+\[ \mathbb{I}_n B = B \]
+
+If $C$ is an $n \times n$ matrix, then
+\[ \mathbb{I}_n C = C \mathbb{I}_n = C \]
+
+\section{Matrix formulation of linear equations §5.5}
+\begin{align*}
+A_{11}x_1 + A_{12}x_2  + ... + A_{1n}x_n &= b_1 \\
+A_{21}x_1 + A_{22}x_2  + ... + A_{2n}x_n &= b_2 \\
+\vdots \\
+A_{m1}x_1 + A_{m2}x_2  + ... + A_{mn}x_n &= b_m \\
+\end{align*}
+
+We can write the above system as
+\[ A \vec{x} = \vec{b} \]
+where
+\[ 
+A = \begin{bmatrix}
+A_{11} & A_{12} & ... & A_{1n} \\
+A_{21} & A_{22} & ... & A_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+A_{m1} & A_{m2} & ... & A_{mn} \\
+\end{bmatrix}
+\]
+\[ 
+\vec{x} = \begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+\text{ and } \vec{b} = \begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_n
+\end{bmatrix}
+\]
+
+\subsection{Terminology}
+Matrices of the form $\displaystyle{ 
+x = \begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix} }$ and $y = \begin{bmatrix}
+y_1 & y_2 & ... & y_n
+\end{bmatrix}$ are referred to as column and row vectors, respectively, of length $n$.
+
+\section{Rank §5.6}
+Given an $m \times n$ matrix $A$, we can perform Gaussian elimination to put it into row echelon form $B$. Note that, although there is no unique row echelon form, the number of pivots will always be the same. Then the rank of $A$ is defined by
+\[ \text{rank}(A) = \# \text{ of pivots of } A \]
+
+\subsection{Example}
+We previously showed using Gaussian elimination that the matrix
+\[
+A = \begin{bmatrix}
+1 & 3 & -1 & 1 \\
+2 & 4 & 2 & 1 \\
+-3 & -9 & 3 & -3 
+\end{bmatrix}
+\]
+can be row-reduced to
+\[
+\begin{bmatrix}
+1 & 3 & -1 & 1 \\
+0 & 1 & -2 & \frac{1}{2} \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+
+Since there are 2 pivots, we get
+\[ \text{rank}(A) = 2 \]
+
+\section{The solutions space for linear systems of equations}
+\subsection{Theorem}
+Suppose $A$ is an $m \times n$ matrix and $\vec{b}$ is an $m$-column vector. Then the matrix equation
+\[ A \vec{x} = \vec{b} \]
+has
+\begin{enumerate}[ (i) ]
+\item no solutions if $\text{rank}(A) \not = \text{rank}([A | \vec{b}] )$,
+\item and at least one non-trivial solution ($\vec{x} \not = \vec{0}$, presumably also $\vec{b} \not = \vec{0}$) if $\text{rank}(A) = \text{rank}([A | \vec{b}] )$.
+
+Furthermore, if $\text{rank}(A) = \text{rank}([A | \vec{b}] )$, then\\
+\begin{enumerate}[label=(\roman{enumi}.\alph*)]
+\item there is a unique solution if $\text{rank}(A) = n$,
+
+\item and an infinite number of solutions with $n$-rank($A$) free parameters if $\text{rank}(A) < n$.
+\end{enumerate}
+
+\end{enumerate}
+
+\section{LU decomposition}
+Gaussian elimination is an effective method for solving systems of linear equations
+\[ A \vec{x} = \vec{b} \quad (*) \]
+\begin{itemize}
+\item For $n \times n$ matrices $A$, the computational effort to solve (*) is $n^3$.
+\item $n = 10^6$ is not considered large nowadays!
+\end{itemize}
+
+Gaussian elimination acts on the augmented matrix. Often you may have a constant $A$, but then have many different vectors $\vec{b}$ so Gaussian elimination can be inefficient in this case since it requires $A$ gets changed everytime $\vec{b}$ is.
+
+\subsection{Definition}
+A factorisation of an $n \times n$ matrix of the form
+\[ A = LU \]
+where $L$ is a lower triangular matrix, and $U$ is an upper triangular matrix (both are also $n \times n$) is known as an LU-decomposition for $A$.
+
+\[ 
+\begin{bmatrix}
+1 & 0 & 0 \\
+3 & -1 & 0 \\
+4 & 9 & 2
+\end{bmatrix}
+\quad
+\begin{bmatrix}
+7 & -2 & -1 \\
+0 & 9 & 6 \\
+0 & 0 & 4 \\
+\end{bmatrix}
+\]
+The matrix on the left is a lower triangular matrix, and the one on the right is an upper triangular matrix.
+
+To solve
+\[ A \vec{x} = \vec{b} \]
+we use LU decomposition to write it as follows
+\[ LU \vec{x} = \vec{b} \quad (**) \]
+
+To solve (**), we do the following:
+\begin{enumerate}[ (i) ]
+\item Set $\vec{y} = U \vec{x}$.\\
+Then (x) becomes
+\[ L \vec{y} = \vec{b} \quad (**) \]
+which can solve by back-substitution to get $\vec{y}$(since $L$ is in row echelon form).
+
+\item We then solve $U \vec{x} = \vec{y}$\\
+using forward substitution to get $\vec{x}$
+\end{enumerate}
+\end{document}
