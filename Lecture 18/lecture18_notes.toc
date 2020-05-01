@@ -1,0 +1,13 @@
+\contentsline {section}{Determinants of $n \times n$ matrices - continued}{1}{section*.3}%
+\contentsline {subsection}{Example}{1}{section*.4}%
+\contentsline {subsection}{Solution}{2}{section*.5}%
+\contentsline {section}{Properties of the determinant §5.3}{2}{section*.6}%
+\contentsline {section}{Inverting matrices using determinants §5.3, 5.4}{2}{section*.7}%
+\contentsline {subsection}{Example}{2}{section*.8}%
+\contentsline {subsection}{Solution}{2}{section*.9}%
+\contentsline {section}{Cross product}{3}{section*.10}%
+\contentsline {section}{Solution space for $n \times n$ linear systems of equations}{3}{section*.11}%
+\contentsline {subsection}{Theorem}{3}{section*.12}%
+\contentsline {section}{Eigenvalues and eigenvectors §5.7.2}{3}{section*.13}%
+\contentsline {subsection}{Definition}{3}{section*.14}%
+\contentsline {subsection}{Example}{4}{section*.15}%

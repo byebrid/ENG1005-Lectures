@@ -1,0 +1,11 @@
+\contentsline {section}{Matrix inverses - continued}{1}{section*.3}%
+\contentsline {subsection}{2x2 matrix inversion}{1}{section*.4}%
+\contentsline {subsection}{Example}{2}{section*.5}%
+\contentsline {subsection}{Solution}{2}{section*.6}%
+\contentsline {section}{Matrix inversion via Gauss-Jordan elimination}{2}{section*.7}%
+\contentsline {subsection}{Matrix inversion algorithm}{2}{section*.8}%
+\contentsline {subsection}{Example}{2}{section*.9}%
+\contentsline {subsection}{Solution}{3}{section*.10}%
+\contentsline {section}{Determinants §5.3}{4}{section*.11}%
+\contentsline {subsection}{2x2 matrices}{4}{section*.12}%
+\contentsline {subsection}{$n$x$n$ matrices}{4}{section*.13}%

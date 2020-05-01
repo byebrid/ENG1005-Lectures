@@ -76,3 +76,15 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - LU decomposition - continued
   - Determining the LU decomposition
   - Matrix inversion (§5.4)
+- [Lecture 17](<Lecture 17/lecture17_notes.pdf>)
+  - Matrix inversion - continued
+  - Matrix inversion via Gauss-Jordan elimination
+  - Determinants (§5.3)
+- [Lecture 18](<Lecture 18/lecture18_notes.pdf>)
+  - Determinants of n x n matrices - continued
+  - Properties of the determinant (§5.3)
+  - Inverting matrices using determinants (§5.3, 5.4)
+  - Cross product (revisited)
+  - Solution space for n x n linear systems of equations
+  - Eigenvalues and eigenvectors (§5.7.2)
+
