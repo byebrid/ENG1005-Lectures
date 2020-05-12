@@ -1,0 +1,296 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% Rank
+\DeclareMathOperator{\rank}{rank}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 19}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+Click \href{https://echo360.org.au/lesson/G_8402119b-734b-4e1e-a3b4-7e907e86ddba_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-05-05T15:58:00.000_2020-05-05T16:53:00.000/classroom#sortDirection=desc}{here} for a recording of the lecture.
+
+\section{Eigenvalues - continued}
+\subsection{Example}
+\[ 
+\text{Let } A = \begin{bmatrix}
+0 & -1 \\
+1 & 0
+\end{bmatrix}
+\text{ and }
+\vec{v} = \begin{bmatrix}
+-1 \\
+i
+\end{bmatrix}
+\]
+
+Then,
+\[ 
+A\vec{v} = 
+\begin{bmatrix}
+0 & -1 \\
+1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+-1 \\
+i
+\end{bmatrix}
+= \begin{bmatrix}
+-i \\
+-1
+\end{bmatrix}
+= \begin{bmatrix}
+-i \\
+i^2
+\end{bmatrix}
+= i \begin{bmatrix}
+-1 \\
+i
+\end{bmatrix}
+\]
+\[ 
+\Rightarrow A\vec{v} = i\vec{v}
+\]
+So $\vec{v}$ is a complex eigenvector of $A$ with eigenvalue $\lambda = i$.
+
+\section{Characteristic equation}
+If $\vec{v}$ is an eigenvector of matrix $A$, then
+\[ A \vec{v} = \lambda \vec{c} \]
+\[ (A - \lambda \mathbb{I})\vec{v} = \vec{0} \]
+This equation can have a non-trivial solution if and only if $\det(A - \lambda \mathbb{I})=0$.
+So, to find eigenvalues, we want to solve the equation
+\[ \det(A - \lambda \ident)=0 \]
+for $\lambda$. This is the \textbf{characteristic equation} of $A$.
+
+\subsection{Remarks}
+\begin{enumerate}[ (a) ]
+\item If $\lambda$ satisfies the characteristic equation $\det(A - \lambda \ident)=0$, then there exists at least 1 eigenvector $\vec{v}$ of $A$ satisfying
+\[ A \vec{v} = \lambda \vec{v} \]
+\item If $\vec{v}$ is an eigenvector of $A$ with eigenvalue $\lambda$, then $\lambda$ satisfies the characteristic equation $\det(A - \lambda \ident)=0$.
+\item When written out explicitly, we have
+\[ \text{c}(\lambda) := \det(A - \lambda \ident _n) = c_0 + c_1 \lambda + ... + c_n \lambda^n \]
+where $A$ is an $n \times n$ matrix. This polynomial is known as the \textbf{characteristic polynomial} of $A$. It can have, at most, $n$ distinct (complex) roots.
+\item If $\vec{v}$ is an eigenvector of $A$, then so is $\alpha \vec{v}$ for any $\alpha \not = 0$.
+\[ A(\alpha \vec{v}) = \alpha A \vec{v} = \alpha \lambda \vec{v} = \lambda (\alpha \vec{v}) \]
+\[ \Rightarrow A(\alpha \vec{v}) = \lambda (\alpha \vec{v}) \]
+\item If $\vec{v}$ is a complex eigenvector of a real matrix $A$ with a complex eigenvalue $\lambda$, then the complex conjugate $\overline{\vec{v}}$ is also a complex eigenvector of $A$ with a complex eigenvalue $\overline{\lambda}$.
+\[ \vec{v} = \begin{bmatrix}
+v_1 \\
+v_2 \\
+\vdots \\
+v_n
+\end{bmatrix} 
+\Rightarrow \overline{\vec{v}} = \begin{bmatrix}
+\overline{v_1} \\
+\overline{v_2} \\
+\vdots \\
+\overline{v_n}
+\end{bmatrix} 
+\]
+
+\[ 
+A = \begin{bmatrix}
+0 & -1 \\
+1 & 0
+\end{bmatrix},\ 
+\vec{v} = \begin{bmatrix}
+-1 \\
+i
+\end{bmatrix}
+\Rightarrow A \vec{v} = \lambda \vec{v},\ \lambda = i
+\]
+\[ \Rightarrow A \overline{\vec{v}} = \overline{\lambda} \overline{\vec{v}},\ \overline{\lambda} = -i \]
+\end{enumerate}
+
+\subsection{Example}
+Determine all the eigenvalues and eigenvectors of
+\[ A = \begin{bmatrix}
+2 & 1 \\
+4 & 2
+\end{bmatrix} \]
+
+\subsection{Solution}
+First, we compute the characteristic polynomial:
+\[ 
+\text{c}(\lambda) = \det(A - \lambda \ident) 
+= \det(\begin{bmatrix}
+2 & 1 \\
+4 & 2
+\end{bmatrix}
+- \begin{bmatrix}
+\lambda & 0 \\
+0 & \lambda
+\end{bmatrix} 
+= \det(\begin{bmatrix}
+2 - \lambda & 1 \\
+4 & 2 - \lambda
+\end{bmatrix})
+= (2 - \lambda)^2 - 4
+\]
+\[
+\Rightarrow \text{c}(\lambda) = \lambda^2 - 4\lambda = \lambda (\lambda - 4)
+\]
+Thus, $\text{c}(\lambda) = 0 \Leftrightarrow \lambda = 0 \text{ or } \lambda = 4$. So we now have the eigenvalues of $A$.
+
+\underline{The eigenvector associated with $\lambda = 4$:}
+\[ (A - 4 \ident) \vec{v} = \vec{0} \Rightarrow \left( \begin{bmatrix}
+2 & 1\\
+4 & 2
+\end{bmatrix} 
+- \begin{bmatrix}
+4 & 0 \\
+0 & 4
+\end{bmatrix} \right)
+\begin{bmatrix}
+v_1 \\
+v_2
+\end{bmatrix}
+= \begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+\]
+
+\begin{align*}
+&\Rightarrow \begin{bmatrix}[cc|c]
+-2 & 1 & 0 \\
+4 & -2 & 0
+\end{bmatrix} \\
+&\Rightarrow \begin{bmatrix}[cc|c]
+-2 & 1 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+\begin{matrix}
+\\
+R_2 \rightarrow R_2 + 2R_1
+\end{matrix} \\
+&\Rightarrow -2v_1 + v_2 = 0
+\end{align*}
+Setting $v_1 = 1$, shows that
+\[ \vec{v_1} = \begin{bmatrix}
+1 \\
+2
+\end{bmatrix} \]
+is an eigenvector of $A$ with eigenvalue $\lambda_1 = 4$.
+
+\underline{Now, the eigenvector associated with $\lambda = 0$:}
+
+\begin{align*}
+(A - 0 \ident) \vec{v} - \vec{0} &\Rightarrow \begin{bmatrix}
+2 & 1 \\
+4 & 2
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\
+v_2
+\end{bmatrix}
+= \begin{bmatrix}
+0 \\
+0
+\end{bmatrix} \\
+&\Rightarrow \begin{bmatrix}[cc|c]
+2 & 1 & 0 \\
+4 & 2 & 0
+\end{bmatrix} \\
+&\Rightarrow \begin{bmatrix}[cc|c]
+2 & 1 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+\begin{matrix}
+\\
+R_2 \rightarrow R_2 - 2R_1
+\end{matrix} \\
+\Rightarrow 2v_1 + v_2 = 0
+\end{align*}
+Setting $v_1 = 1$, shows that
+\[ \vec{2} = \begin{bmatrix}
+1 \\
+-2
+\end{bmatrix}
+\]
+is an eigenvector of $A$ with eigenvalue $\lambda_2 = 0$.
+
+\section{Complete set of eigenvectors §5.7.2, 5.7.7}
+\subsection{Definition}
+An $n \times n$ matrix $A$ has a complete set of eigenvectors if there exists $n$ linearly independent eigenvectors $v_1, v_2, ..., v_n$. That is, 
+\[ \alpha_1 \vec{v}_1 + \alpha_2 \vec{v}_2 + ... + \alpha_n \vec{v}_n = \vec{0} \Leftrightarrow \alpha_1 = \alpha_2 =...=\alpha_n = 0 \]
+
+\subsection{Theorem}
+Suppose $A$ is an $n \times n$ matrix.
+
+\begin{enumerate}[ (a) ]
+\item If $A$ has $n$ distinct eigenvalues, then $A$ has a complete set of eigenvectors.
+\item If $A$ is a \textbf{symmetric} matrix, ($A^T = A$), then $A$ has a complete set of \textbf{orthonormal} eigenvectors $\vec{v}_1, \vec{v}_2, ..., \vec{v}_n$ with associated \textbf{real} eigenvalues.
+
+Note that orthonormal means
+\[ \vec{v}_i \cdot \vec{v}_j = \delta_{ij} \quad , 1 \leq i,\ j \leq n\]
+Note that $[\delta{ij}] = \ident$.
+\end{enumerate}
+
+\subsection{Remark}
+If $\vec{v}_1, \vec{v}_2, ..., \vec{v}_n$ is a complete set of eigenvectors for an $n \times n$ matrix $A$, then any $n$-column vector $\vec{w}$ can be expressed as
+\[ \vec{w} = \sum_{j=1}^n c_j \vec{v}_j \]
+
+Using this, we see
+\[ A\vec{w} = \sum_{j=1}^n c_j A \vec{v}_j = \sum_{j=1}^n c_j \lambda \vec{v}_j \]
+
+
+\end{document}

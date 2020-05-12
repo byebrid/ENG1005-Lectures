@@ -1,0 +1,11 @@
+\contentsline {section}{Repeated eigenvalues §5.7.4}{1}{section*.3}%
+\contentsline {subsection}{Remarks}{1}{section*.4}%
+\contentsline {section}{Parametric curves}{2}{section*.5}%
+\contentsline {subsection}{Examples}{2}{section*.6}%
+\contentsline {section}{Tangent vectors}{2}{section*.7}%
+\contentsline {subsection}{Example}{3}{section*.8}%
+\contentsline {section}{Functions of several variables §9.6, 9.6.1}{3}{section*.9}%
+\contentsline {subsection}{Definition}{3}{section*.10}%
+\contentsline {subsection}{Examples}{3}{section*.11}%
+\contentsline {section}{Parametric surfaces}{3}{section*.12}%
+\contentsline {subsection}{Definition}{3}{section*.13}%

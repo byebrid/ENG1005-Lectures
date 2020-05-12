@@ -87,4 +87,20 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - Cross product (revisited)
   - Solution space for n x n linear systems of equations
   - Eigenvalues and eigenvectors (§5.7.2)
+- [Lecture 19](<Lecture 19/lecture19_notes.pdf>)
+  - Eigenvalues and eigenvectors - continued
+  - Characteristic equation of a matrix
+  - Complete set of eigenvectors (§5.7.2, 5.7.7)
+- [Lecture 20](<Lecture 20/lecture20_notes.pdf>)
+  - Repeated eigenvalues (§5.7.4)
+  - Parametric curves
+  - Tangent vectors
+  - Functions of several variables (§9.6, 9.6.1)
+  - Parametric surfaces
+- [Lecture 21](<Lecture 21/lecture21_notes.pdf>)
+  - Parametric surfaces - continued
+  - Level surface
+  - Limits and continuity
+  - Partial derivatives (§9.6.2)
+  - Successive differentiation (§9.6.7)
 
