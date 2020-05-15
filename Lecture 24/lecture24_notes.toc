@@ -1,0 +1,7 @@
+\contentsline {section}{Taylor's theorem in higher dimensions §9.7.1}{1}{section*.3}%
+\contentsline {subsection}{Linearisation}{2}{section*.4}%
+\contentsline {subsubsection}{Example}{2}{section*.5}%
+\contentsline {subsubsection}{Solution}{3}{section*.6}%
+\contentsline {section}{Differential §9.6.9}{3}{section*.7}%
+\contentsline {subsubsection}{Example}{3}{section*.8}%
+\contentsline {subsubsection}{Solution}{4}{section*.9}%

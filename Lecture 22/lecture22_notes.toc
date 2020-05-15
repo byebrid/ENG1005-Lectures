@@ -1,0 +1,16 @@
+\contentsline {section}{Partial derivatives - continued}{1}{section*.3}%
+\contentsline {subsection}{Example}{1}{section*.4}%
+\contentsline {subsection}{Solution}{2}{section*.5}%
+\contentsline {subsection}{Observation}{2}{section*.6}%
+\contentsline {subsection}{Theorem: Equality of mixed partials}{3}{section*.7}%
+\contentsline {subsection}{Challenge}{3}{section*.8}%
+\contentsline {section}{The Chain Rule §9.6.5}{3}{section*.9}%
+\contentsline {subsection}{Single variable chain rule}{3}{section*.10}%
+\contentsline {subsection}{Two variable chain rule}{3}{section*.11}%
+\contentsline {subsubsection}{Theorem}{3}{section*.12}%
+\contentsline {subsubsection}{Informal versions}{4}{section*.13}%
+\contentsline {subsection}{Full Chain Rule}{4}{section*.14}%
+\contentsline {subsection}{Theorem}{4}{section*.15}%
+\contentsline {subsubsection}{Informal versions}{4}{section*.16}%
+\contentsline {subsection}{Example}{4}{section*.17}%
+\contentsline {subsection}{Solution}{4}{section*.18}%

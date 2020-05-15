@@ -1,0 +1,15 @@
+\contentsline {section}{Chain rule - continued}{1}{section*.3}%
+\contentsline {subsection}{Example}{1}{section*.4}%
+\contentsline {subsection}{Solution}{1}{section*.5}%
+\contentsline {section}{Directional derivatives and gradients}{2}{section*.6}%
+\contentsline {subsection}{Definition}{2}{section*.7}%
+\contentsline {subsection}{Definition}{3}{section*.8}%
+\contentsline {subsection}{Meaning of the directional derivative}{3}{section*.9}%
+\contentsline {subsection}{Relationship between the gradient and the directional derivative}{3}{section*.10}%
+\contentsline {subsubsection}{Theorem}{3}{section*.11}%
+\contentsline {subsubsection}{Proof}{3}{section*.12}%
+\contentsline {subsection}{Example}{4}{section*.13}%
+\contentsline {subsection}{Solution}{4}{section*.14}%
+\contentsline {subsection}{Geometric significance of $\nabla f$}{4}{section*.15}%
+\contentsline {subsubsection}{Theorem}{4}{section*.16}%
+\contentsline {subsubsection}{Proof}{5}{section*.17}%

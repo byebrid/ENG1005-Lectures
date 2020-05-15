@@ -103,4 +103,12 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - Limits and continuity
   - Partial derivatives (§9.6.2)
   - Successive differentiation (§9.6.7)
-
+- [Lecture 22](<Lecture 22/lecture22_notes.pdf>)
+  - Partial derivatives/successive differentiation - continued
+  - The chain rule (§9.6.5)
+- [Lecture 23](<Lecture 23/lecture23_notes.pdf>)
+  - Chain rule - continued
+  - Directional derivatives and gradients 
+- [Lecture 24](<Lecture 24/lecture24_notes.pdf>)
+  - Taylor's theorem in higher dimensions (§9.7.1)
+  - Differential (§9.6.9)

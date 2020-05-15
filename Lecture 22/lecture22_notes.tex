@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 22}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+Click \href{https://echo360.org.au/lesson/G_8402119b-734b-4e1e-a3b4-7e907e86ddba_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-05-12T15:58:00.000_2020-05-12T16:53:00.000/classroom#sortDirection=desc}{here} for a recording of the lecture.
+
+\section{Partial derivatives - continued}
+\subsection{Example}
+Compute all 2nd order partial derivatives for
+\[ f(x, y) = e^{x^2y} \]
+
+\subsection{Solution}
+\begin{align*}
+\frac{\partial^2 f}{\partial y \partial x} &=\frac{\partial}{\partial y} \left( \frac{\partial f}{\partial x} \right) \\
+&= \frac{\partial}{\partial y} \left( 2xy e^{x^2y} \right) \\
+&= 2x \frac{\partial}{\partial y} \left( y e^{x^2y} \right) \\
+&= 2x \left( e^{x^2y} + y x^2 e^{x^2y} \right) \\
+&= 2x e^{x^2y} + 2x^3y e^{x^2y}
+\end{align*}
+
+\begin{align*}
+\frac{\partial^2 f}{\partial x^2} &= \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial x} \right) \\
+&= \frac{\partial}{\partial x} \left( 2xy e^{x^2y} \right) \\
+&= 2y \frac{\partial}{\partial x} \left( x e^{x^2y} \right) \\
+&= 2y \left( e^{x^2y} + x 2xy e^{x^2y} \right) \\
+&= 2y e^{x^2y} + 4x^2y^2 e^{x^2y}
+\end{align*}
+
+\begin{align*}
+\frac{\partial^2 f}{\partial x \partial y} &= \frac{\partial }{\partial x} \left( \frac{\partial f}{\partial y} \right) \\
+&=  \frac{\partial }{\partial x} \left( x^2 e^{x^2 y} \right) \\
+&= x^2 2xy e^{x^2y} + 2x e^{x^2y} \\
+&= 2x^3 y e^{x^2y} + 2x e^{x^2y}
+\end{align*}
+
+\begin{align*}
+\frac{\partial^2 f}{\partial y^2} &= \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial y} \right) \\
+&= \frac{\partial}{\partial y} \left( x^2 e^{x^2y} \right) \\
+&= x^2 \frac{\partial}{\partial y} \left( e^{x^2y} \right) \\
+&= x^2 \left( x^2 e^{x^2y} \right) \\
+&= x^4 e^{x^2y}
+\end{align*}
+
+\subsection{Observation}
+\[ \frac{\partial^2}{\partial x \partial y} \left( e^{x^2y} \right) = \frac{\partial^2}{\partial y \partial x} \left( e^{x^2y} \right) \]
+
+\subsection{Theorem: Equality of mixed partials}
+Suppose that there exists some $R>0$ such that $f(x,y), \dfrac{\partial f}{\partial x}, \dfrac{\partial f}{\partial y},  \dfrac{\partial^2 f}{\partial x \partial y}, \dfrac{\partial^2 f}{\partial y \partial x}$ are continuous on the ball $B_R((a, b))$. Then
+\[ \frac{\partial^2 f}{\partial x \partial y}(a, b) = \frac{\partial^2 f}{\partial y \partial x}(a, b) \]
+
+\subsection{Challenge}
+Find a function $f(x, y)$ such that $\dfrac{\partial^2 f}{\partial x \partial y}$ and $\dfrac{\partial^2 f}{\partial y \partial x}$ both exist on some disc $B_R((a, b))$ in $\reals^2$, but 
+\[ \frac{\partial^2 f}{\partial x \partial y}(a, b) \not = \frac{\partial^2 f}{\partial y \partial x}(a, b) \]
+
+\section{The Chain Rule §9.6.5}
+\subsection{Single variable chain rule}
+Start with some differentiable functions
+\[ f(x) \text{ and } x(t) \]
+and define a new function
+\[ y(t) = f(x(t)) \]
+Then
+\[ \frac{dy}{dt}(t) = \frac{df}{dx}\left( x(t) \right) \frac{dx}{dt}(t) \]
+\[ \text{Alternatively, } \dfrac{df}{dt} = \dfrac{df}{dx} \dfrac{dx}{dt} \]
+
+\subsection{Two variable chain rule}
+\subsubsection{Theorem}
+Suppose $f(x, y)$, $x(s, t)$ and $y(s, t)$ are all differentiable functions, and define
+\[ z(s, t) = f(x(s,t), y(s,t)) \]
+Then $z(s, t)$ is differentiable and
+\[ \frac{\partial z}{\partial s}(s, t) = \frac{\partial f}{\partial x} \left( x(s, t), y(s, t) \right) \frac{\partial x}{\partial s}(s, t) + \frac{\partial f}{\partial y} \left( x(s, t), y(s, t) \right) \frac{\partial y}{\partial s}(s, t) \]
+\[ \frac{\partial z}{\partial s}(s, t) = \frac{\partial f}{\partial x} \left( x(s, t), y(s, t) \right) \frac{\partial x}{\partial t}(s, t) + \frac{\partial f}{\partial y} \left( x(s, t), y(s, t) \right) \frac{\partial y}{\partial t}(s, t) \]
+
+\subsubsection{Informal versions}
+\[ \frac{\partial z}{\partial s} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial s} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial s} \]
+\[ \frac{\partial z}{\partial t} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial t} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial t} \]
+\[ \frac{\partial f}{\partial s} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial s} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial s} \]
+\[ \frac{\partial f}{\partial t} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial t} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial t} \]
+
+\subsection{Full Chain Rule}
+\subsection{Theorem}
+Suppose $f(x_1, x_2, ..., x_n)$ is differentiable and
+\[ x_i(t_1, t_2, ..., t_m),\ i = 1, 2, ..., n \]
+are differentiable. Then
+\[ z(t_1, t_2, ..., t_m) = f(x_1(t_1, t_2, ..., t_m), x_2((t_1, t_2, ..., t_m), ..., x_n(t_1, t_2, ..., t_m)) \]
+is differentiable and
+\[ \frac{\partial z}{\partial t_j} (t_1, ..., t_m) = \sum_{i=1}^n \frac{\partial f}{\partial x_i}( x_1(t_1, ..., t_m), ..., x_n(t_1 ..., t_m) ) \frac{\partial x_i}{\partial t_j} (t_1, ..., t_m) \]
+
+\subsubsection{Informal versions}
+\[ \frac{\partial z}{\partial t_j} = \sum_{i=1}^n \frac{\partial f}{\partial x_i} \frac{\partial x_i}{\partial t_j} \text{ for } j = 1, 2, ..., m  \]
+
+\subsection{Example}
+Let $f(x, y) = \ln(x^2 + y^2),\ x(t) = \cos(t),\ y(s, t) = st$ and define
+\[ z(s, t) = f(x(t), y(s, t)) = \ln \left( \cos^2(t) + s^2 t^2 \right) \]
+
+\subsection{Solution}
+\begin{align*}
+\frac{\partial z}{\partial s} &= \frac{\partial f}{\partial x} \frac{\partial x}{\partial s} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial s} \\
+&= 0 + \frac{2y}{x^2 + y^2} t \\
+&= \frac{2st^2}{\cos^2(t) + s^2t^2}
+\end{align*}
+
+\begin{align*}
+\frac{\partial z}{\partial t} &= \frac{\partial f}{\partial x} \frac{\partial x}{\partial t} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial t} \\
+&= \frac{2x}{x^2 + y^2} (- \sin(t)) + \frac{2y}{x^2 + y^2} s \\
+&= \frac{-2\cos(t) \sin(t)}{\cos^2(t) + s^2t^2} + \frac{2s^2t}{\cos^2(t) + s^2t^2} = \frac{2s^2t -2\cos(t) \sin(t)}{\cos^2(t) + s^2t^2}
+\end{align*}
+
+\end{document}

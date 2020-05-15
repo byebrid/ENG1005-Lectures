@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 24}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+Click \href{https://echo360.org.au/lesson/G_35fe23e0-41ee-4e6f-b0f5-05f4155bb7b0_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-05-14T15:58:00.000_2020-05-14T16:53:00.000/classroom#sortDirection=desc}{here} for a recording of the lecture.
+
+\section{Taylor's theorem in higher dimensions §9.7.1}
+Suppose $f(x, y)$ has partial derivatives up to $(n+1)$th order that are continuous on some disc $\overline{B}_\rho((a, b))$.\\
+Then for $\sqrt{h^2 + k^2} \leq p$, the function
+\[ g(t) = f(a + th, b + tk) \in \overline{B}_\rho((a, b)) \text{ for } t \in [-1, 1] \]
+and its derivatives up to $(n+1)$th order are continuous on $[-1, 1]$.\\
+Thus, by Taylor's Theorem, we know that
+\[ g(t) = \sum_{r=0}^n \frac{1}{r!} \frac{d^rg}{dt^r	}t^r + \frac{t^{n+1}}{n!} \frac{d^{n+1}g}{dt^{n+1}}(\theta t), \quad 0 < \theta < 1 \]
+
+By the chain rule,
+\begin{align*}
+\frac{dg}{dt}(0) &= \left. \frac{\partial f}{\partial x}(a, b) \frac{d}{dt}(a + th) \right|_{t=0} + \left. \frac{\partial f}{\partial y}(a, b) \frac{d}{dt}(b + tk) \right|_{t=0} \\
+&= \frac{\partial f}{\partial x}(a, b)h + \frac{\partial f}{\partial y}(a, b) k
+\end{align*}
+where $x = a+th,\ y = b + tk$.
+
+Similar calculations show that
+\[ \frac{d^2g}{dt^2}(0) = h^2 \frac{\partial^2 f}{\partial x^2}(a, b) + 2hk \frac{\partial^2 f}{\partial x \partial y}(a, b) + k^2 \frac{\partial^2}{\partial y^2}(a, b) \]
+
+and, more generally,
+\[ \frac{d^rg}{dt^r}(0) = \sum_{\ell=0}^r \begin{pmatrix}
+r \\
+\ell
+\end{pmatrix}
+h^\ell k^{r-\ell} \frac{\partial^r f}{\partial x^\ell \partial y^{r-\ell}}(a, b)
+\]
+where
+\[ \begin{pmatrix}
+r \\
+\ell
+\end{pmatrix}
+= \frac{r!}{\ell!(r-\ell)!}
+\]
+
+These formulae show that at $t=1$,
+\begin{align*}
+f((a,b) + (h,k)) =  f(a, b) &+ h\frac{\partial f}{\partial x}(a, b) + k\frac{\partial f}{\partial y}(a, b) + h^2\frac{\partial^2 f}{\partial x^2}(a, b) + 2hk \frac{\partial^2 f}{\partial x \partial y}(a, b) + k^2 \frac{\partial^2 f}{\partial y^2}(a, b) \\
+&+ \displaystyle{ \sum_{r=3}^n \frac{1}{r!} \sum_{\ell=0}^r \begin{pmatrix}
+r \\
+\ell
+\end{pmatrix}
+\frac{\partial^r f}{\partial x^\ell \partial y^{r-\ell}} (a, b) h^\ell k^{\ell - r} + \sum_{\ell=0}^{n+1} R_\ell(h,k)h^\ell k^{n+1 - \ell} }
+\end{align*}
+
+where the $R_\ell$ are continuous on $\overline{B}_\rho((0, 0))$, and $h, k \in \overline{B}_\rho((0, 0))$. This formula is the 2 dimensional version of Taylor's Theorem.\\
+Note that the first line is the most important part for us.
+
+Setting
+\[ h = x - a \text{ and } k = y - b \]
+we can write the above result as
+\begin{align*}
+f(x, y) = f(a, b) &+ \frac{\partial f}{\partial x}(a, b)(x - a) + \frac{\partial f}{\partial y}(a, b)(y - b) + \frac{\partial^2  f}{\partial x^2}(a, b)(x - a)^2 + 2\frac{\partial^2 f}{\partial x \partial y}(x-a)(y-b) + \frac{\partial^2 f}{\partial y^2}(y - b)^2 \\
+&+ \sum_{r=3}^n \frac{1}{r!} \sum_{\ell=0}^r \begin{pmatrix}
+r \\
+\ell
+\end{pmatrix}
+\frac{\partial^2 f}{\partial x^\ell \partial y^{r-\ell}} (a, b) (x - a)^\ell (y - b)^{\ell - r} + \sum_{\ell=0}^{n+1} R_\ell(x-a, y-b)(x - a)^\ell (y - b)^{n+1 - \ell}
+\end{align*}
+Again, we're mainly going to be interested in the first and second order Taylor polynomials.
+
+\subsection{Linearisation}
+By Taylor's Theorem, we have that
+\[ f(x, y) \approx L(x, y) \text{ for } \sqrt{(x-a)^2 + (y-b)^2} \ll 1 \]
+where
+\[ L(x, y) = f(x, y) + \frac{\partial f}{\partial x}(a, b)(x-a) + \frac{\partial f}{\partial y}(a, b)(y - b) \]
+is known as the \textbf{linearisation} (or linear approximation) of $f(x,y)$ at the point $(a, b)$.
+
+\subsubsection{Example}
+Find the linear approximation to $f(x,y) = xe^{xy}$ at the point $(1, 0)$ and use this to approximate $f(1.2, -0.1)$.
+
+\subsubsection{Solution}
+\[ \frac{\partial f}{\partial x} = \frac{\partial}{\partial x}\left( x e^{xy}\right) = e^{xy} + xye^{xy} = e^{xy}(1 + xy) \]
+\[ \frac{\partial f}{\partial y} = \frac{\partial}{\partial y}\left( xe^{xy} \right) = x^2 e^{xy} \]
+
+So,
+\begin{align*}
+\frac{\partial f}{\partial x}(1, 0) &= e^0 ( 1 + 0) = 1 \\
+\frac{\partial f}{\partial y}(1, 0) &= 1^2 e^0 = 1 \\
+f(1, 0) &= 1 e^{0} = 1 \\
+\Rightarrow L(x, y) &= 1 + (x-1) + y = x + y \\
+\Rightarrow f(1.2, -0.1) &\approx L(1.2, -0.1) = 1.2 + (-0.1) = 1.1
+\end{align*}
+If you check the error here, you should find it to be $|f(1.2, -0.1) - L(1.2, -0.1)| = 0.0142$, which is quite good considering we only used the first order approximation.
+
+\underline{Note:} In higher dimensions, the linearisation of $f(x_1, x_2, ..., x_n)$ at the point $\vec{a} = (a_1, a_2, ..., a_n)$ is
+\[ L(x_1, x_2, ..., x_n) = f(a_1, a_2, ..., a_n) + \sum_{i=1}^n \frac{\partial f}{\partial x_i} (a_1, a_2, ..., a_n) (x_i - a_i) \]
+
+\section{Differential §9.6.9}
+The differential of a function $f(x, y)$ is defined by 
+\[ df = \frac{\partial f}{\partial x}\, dx + \frac{\partial f}{\partial y}\, dy \]
+or, when evaluated at a point $(x_0, y_0) \in \reals^2$ by
+\[ df(x_0, y_0) = \frac{\partial f}{\partial x}(x_0, y_0)\, dx + \frac{\partial f}{\partial y}(x_0, y_0)\, dy \]
+
+Note that the differential is related to the linearisation of $f(x, y)$ at the point $(x_0, y_0)$ by
+\[ L(x, y) = f(x_0, y_0) + df(x_0, y_0) \]
+where $dx = x - x_0$ and $dy = y - y_0$.\\
+Note that you can think of $df$ as measuring the approximate change in $f$ due to the change $(x_0, y_0) \mapsto (x_0 + dx, y_0 + dy)$.
+
+\subsubsection{Example}
+Estimate the change in the period
+\[ T = 2\pi \sqrt{\frac{L}{g}} \]
+of a simple pendulum due to a 2\% increase in length $L$ and a 0.6\% decrease in the gravitational acceleration $g$.
+
+\subsubsection{Solution}
+\[ dL = \frac{2}{100}L \text{ and } dg = \frac{-6}{100}g \]
+Substituting this into
+\begin{align*}
+dT &= \frac{\partial T}{\partial L}\, dL + \frac{\partial T}{\partial g}\, dg \\
+&= 2\pi \frac{1}{2 \sqrt{\frac{L}{g}}} \frac{1}{g}\, dL + 2\pi \frac{1}{2 \sqrt{\frac{L}{g}}} \left( \frac{-L}{g^2} \right)\, dg \\
+&= \frac{\pi}{\sqrt{Lg}}\, dL - \frac{\pi \sqrt{L}}{g^{\frac{3}{2}}}\, dg 
+\end{align*}
+yields
+\begin{align*}
+dT &= \frac{\pi}{\sqrt{Lg}} \frac{1}{50}L + \frac{\pi \sqrt{L}}{g^{\frac{3}{2}}} \frac{3}{50}g \\
+&= \frac{\pi}{50} \sqrt{\frac{L}{g}} + \frac{3 \pi}{50} \sqrt{\frac{L}{g}} \\
+&=  \frac{2\pi}{25} \sqrt{\frac{L}{g}} 
+\end{align*}
+
+\end{document}
