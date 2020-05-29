@@ -1,0 +1,10 @@
+\contentsline {subsubsection}{Example}{1}{section*.3}%
+\contentsline {subsubsection}{Solution}{1}{section*.4}%
+\contentsline {section}{Tangent plane}{2}{section*.5}%
+\contentsline {subsection}{Tangent plane parametrisation}{3}{section*.6}%
+\contentsline {section}{Maximum and minimum values §9.7.2, 9.7.3}{3}{section*.7}%
+\contentsline {subsection}{Definition}{3}{section*.8}%
+\contentsline {subsection}{Definition}{3}{section*.9}%
+\contentsline {subsection}{Theorem}{3}{section*.10}%
+\contentsline {subsection}{Definition}{3}{section*.11}%
+\contentsline {subsection}{Examples}{4}{section*.12}%

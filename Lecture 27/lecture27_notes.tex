@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Lets us do \nth{1}, \nth{2}, which gives 1st 2nd, etc.
+\usepackage[super]{nth}
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 27}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+\url{https://echo360.org.au/lesson/G_35fe23e0-41ee-4e6f-b0f5-05f4155bb7b0_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-05-21T15:58:00.000_2020-05-21T16:53:00.000/classroom#sortDirection=desc}
+
+\subsection{Example}
+The temperature at every point in the closed unit disc
+\[ D = \{ (x, y) \in \reals^2 | x^2 + y^2 \leq 1 \]
+is given by
+\[ T(x, y) = (x + y)e^{-(x^2 + y^2)} \]
+Find the maximum and minimum temperature and where these are achieved on the disc.
+
+\subsection{Solution}
+First note that this is a nice continuous function. 
+
+\underline{Step 1:} Find all the critical points of $T(x, y)$ in the interior of $D$.
+
+\begin{align*}
+\nabla T(x, y) = \vec{0} &\Rightarrow \left\{ \begin{matrix}
+\frac{\partial T}{\partial x} = (1 - 2x(x+y))e^{-(x^2+y^2)} = 0\\
+\frac{\partial T}{\partial y} = (1 - 2y(x+y))e^{-(x^2+y^2)} = 0\\
+\end{matrix} \right. \\
+&\Rightarrow \left\{ \begin{matrix}
+\frac{\partial T}{\partial x} = 1 - 2x(x+y) = 0\\
+\frac{\partial T}{\partial y} = 1 - 2y(x+y) = 0\\
+\end{matrix} \right. \\
+&\Rightarrow \left\{ \begin{matrix}
+\frac{\partial T}{\partial x} = 2x(x+y) = 1\\
+\frac{\partial T}{\partial y} = 2y(x+y) = 1\\
+\end{matrix} \right. \\
+\end{align*}
+
+I'm gonna solve this by noting that $x=y$ as you can see that  both equations are very symmetric. Therefore, from either equation we get
+\begin{align*}
+2x ( x + x) &= 1  \\
+4x^2 &= 1 \\
+\Rightarrow x &= \pm \frac{1}{2}
+\end{align*}
+Therefore the critical points are 
+\[ \left(-\frac{1}{2}, -\frac{1}{2}\right),\ \left( \frac{1}{2}, \frac{1}{2} \right) \]
+Note also that both are inside $D$.
+
+\underline{Step 2:} Find all the critical points of $T(x, y)$ on the boundary of $D$. We can parametrise the boundary of $D$ by 
+\[ \vec{r}(t) = (\cos(t), \sin(t)),\ 0 \leq t \leq 2\pi \]
+Restricting $T(x, y)$ to the boundary gives
+\begin{align*}
+g(t) &= T(\cos(t), \sin(t) ),\ 0 \leq t \leq 2\pi \\
+&= (\cos(t) + \sin(t))e^{-1},\ 0 \leq t \leq 2\pi \\
+g'(t) &= \frac{1}{e}(-\sin(t) + \cos(t)) = 0 \\
+&\Rightarrow \tan(t) = 1 \\
+&\Rightarrow t = \frac{\pi}{4}, \frac{5\pi}{4}
+\end{align*}
+
+The critical points of $T(x,y)$ restricted to the boundary of $D$ are
+\[ \left( \frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}} \right),\ \left( -\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}} \right) \]
+
+\underline{Step 3:} Evaluate $T(x,y)$ at all the critical points.
+
+\begin{center}
+\begin{tabular}{c|c|c}
+Critical points & $T(x, y)$ & Conclusion \\
+\hline
+$(\frac{1}{2}, \frac{1}{2})$ & $\frac{1}{\sqrt{e}}$ & Max temperature \\ 
+$(-\frac{1}{2}, -\frac{1}{2})$ & $-\frac{1}{\sqrt{e}}$ & Min temperature \\
+$(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})$ & $\frac{\sqrt{2}}{e}$ \\
+$(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}})$ & $-\frac{\sqrt{2}}{e}$
+\end{tabular}
+\end{center}
+
+\section{Ordinary differential equations §10.1, 10.2, 10.3}
+An ordinary differential equation (ODE) is an equation that involves a function $y(x)$ and one or more of its derivatives.
+
+The order of an ODE is the highest numbe of derivatives that appear in the equation.
+
+An nth order ODE is called linear if is of the form
+\[ \sum_{k=0}^n a_k(x) \frac{d^k y(x)}{dx^k} = q(x) \]
+If an ODE is not linear, then it called non-linear (shock!).
+
+\subsection{Examples}
+\begin{enumerate}[ (i) ]
+\item $ m \dfrac{d^2 x}{dt^2} = -kx $ governs the motion of a particle of mass $m$ that is attached to a spring. It's a 2nd order linear ODE.
+
+\item $\frac{d^2h}{dt^2} + k \left( \dfrac{dh}{dt} \right)^2 - g = 0$. This roughly describes the motion of a parachute.
+\begin{align*}
+m &= \text{ mass of box and parachute} \\
+h(t) &= \text{ height above the ground at time} \\
+\rho &= \text{ density of air, } C_d \equiv \text{ dry coefficient } \\
+g &= \text{ acceleration due to gravity } \\
+k &= \frac{\pi \rho C_d D^2}{8m}
+\end{align*}
+Note this a 2nd order non-linear ODE>
+
+\end{enumerate}
+
+\section{Solutions of ODES §10.4}
+A solution of an ODE is any function $y(x)$ that satisfies the equation.
+
+\subsection{Example}
+Verify that
+\[ y(x) = \sqrt{1 - x^2} \]
+solves the 1st order non-linear ODE
+\[ \frac{dy}{dx} + \frac{x}{y} = 0 \]
+
+\subsection{Solution}
+\begin{align*}
+\frac{dy}{dx} + \frac{x}{y} &= \frac{-2x}{2\sqrt{1-x^2}} + \frac{x}{\sqrt{1-x^2}} \\
+&= \frac{-x}{\sqrt{1-x^2}} + \frac{x}{\sqrt{1-x^2}} \\
+&= 0
+\end{align*}
+
+\section{General and particular solutions §10.4.2}
+We say that a function $y=y(x, \alpha_1, \alpha_2, ..., \alpha_n)$ that on parameters $\alpha_1, \alpha_2, ..., \alpha_n$ is a \textbf{general solution} of an ODE if every solution of the ODE given by $y(x, \alpha_1, \alpha_2, ..., \alpha_n)$ for some choice of the parameters $\alpha_1, \alpha_2, ..., \alpha_n$.\\
+A \textbf{particular solution} is any solution of the ODE.
+
+\subsection{Example}
+The general solution of the ODE
+\[ \frac{d^2x}{dt^2} + x = 0 \]
+is
+\[ x(t) = A\sin(t) + B\cos(t),\ A, B \in \reals \]
+
+So then setting $A = B = 1$, we get the particular solution
+\[ x(t) = \sin(t) + \cos(t) \]
+
+\subsection{Remark}
+One generally expects that the general solution of an $n$th order ODE will depened on $n$ parameters.
+
+\section{Boundary value problems (BVP) §10.4.3}
+\subsection{Example}
+Solve the BVP:
+\[ \frac{dy^2}{dx^2} + y = 0,\ 0 < x < \frac{\pi}{2} \]
+\[ y(0) = -1,\ y \left(\frac{\pi}{2} \right) = 2 \]
+
+\subsection{Solution}
+The general solution to
+\[ \frac{d^2y}{dx^2} + y = 0 \]
+is
+\[ x(t) = A\sin(x) + B\cos(x),\ A, B \in \reals \]
+The boundary conditions (BCs) then imply
+\[ y(0) = B = -1 \text{ and } y\left(\frac{\pi}{2}\right) = A=2\]
+so our solution is
+\[ y(x) = 2\sin(x) - \cos(x) \]
+
+\section{Initial value problems (IVP) §10.4.3}
+\subsection{Example}
+Newton's law of cooling states that the temperature of a homogeneous object satisfies
+\[ \frac{dT}{dt} = -K(T - T_a) \]
+where $T_a$ is the ambient temperature, $T(t)$ is temperature of body at time $t$, $K > 0$ is some decay constant. The initial condition is
+\[ T(t_0) = T_0 \]
+
+Find the temperature of the body at time $t > t_0$ assuming that $K > 0$ and $T_0 > T_a$.
+
+\end{document}

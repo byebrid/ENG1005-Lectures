@@ -1,0 +1,12 @@
+\contentsline {subsection}{Examples - continued}{1}{section*.3}%
+\contentsline {subsection}{Example}{2}{section*.4}%
+\contentsline {subsection}{Solution}{3}{section*.5}%
+\contentsline {section}{Classifying critical points §9.7.2}{3}{section*.6}%
+\contentsline {subsection}{Theorem}{3}{section*.7}%
+\contentsline {subsection}{Example}{3}{section*.8}%
+\contentsline {subsection}{Solution}{3}{section*.9}%
+\contentsline {section}{Absolute maxima and minima §9.7.4}{4}{section*.10}%
+\contentsline {subsection}{Theorem}{4}{section*.11}%
+\contentsline {subsection}{Terminology}{4}{section*.12}%
+\contentsline {subsection}{Example}{4}{section*.13}%
+\contentsline {subsection}{Solution}{4}{section*.14}%

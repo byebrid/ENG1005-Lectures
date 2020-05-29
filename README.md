@@ -112,3 +112,18 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
 - [Lecture 24](<Lecture 24/lecture24_notes.pdf>)
   - Taylor's theorem in higher dimensions (§9.7.1)
   - Differential (§9.6.9)
+- [Lecture 25](<Lecture 25/lecture25_notes.pdf>)
+  - Differential example
+  - Tangent plane
+  - Maximum and minimum values (§9.7.2, 9.7.3)
+- [Lecture 26](<Lecture 26/lecture26_notes.pdf>)
+  - Maximum and minimum values - continued
+  - Classifying critical points (§9.7.2)
+  - Absolute maxima and minima (§9.7.4)
+- [Lecture 27](<Lecture 27/lecture27_notes.pdf>)
+  - Absolute maxima and minima - continued
+  - Ordinary differential equations (§10.1, 10.2, 10.3)
+  - Solutions of ODEs (§10.4)
+  - General and particular solutions (§10.4.2)
+  - Boundary value problems (BVP) (§10.4.3)
+  - Initial value problems (IVP) (§10.4.3)
