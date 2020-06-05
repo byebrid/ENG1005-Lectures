@@ -1,0 +1,223 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 30}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+\url{https://echo360.org.au/lesson/G_35fe23e0-41ee-4e6f-b0f5-05f4155bb7b0_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-05-28T15:58:00.000_2020-05-28T16:53:00.000/classroom#sortDirection=desc}
+
+\section{Linear homogeneous 2nd order constant coefficients ODEs - continued}
+\subsection*{Case 3: $b^2 - 4ac = 0$}
+Then
+\[ \lambda = \zeta \]
+is the only root of the characteristic equation which yields the solution
+\[ y_1(t) = e^{\zeta t}. \]
+But we need 2 linearly independent solutions to form a general solutions. So, to find a second, linearly independent solution, we set
+\[ y_2(t) = t y_1(t) = t e^{\zeta t}. \]
+Now, quickly note that the first and second derivatives are given by
+\begin{align*}
+\frac{dy_2}{dt} &= y_1 + t \frac{dy_1}{dt}, \\
+\frac{d^2 y_2}{dt^2} &= \frac{dy_1}{dt} + \left( t\frac{d^2 y_1}{dt^2} +  \frac{dy_1}{dt} \right) = 2 \frac{dy_1}{dt} + t \frac{d^2 y_1}{dt^2}.
+\end{align*}
+Now, observe that
+\begin{align*}
+a \frac{d^2 y_2}{dt^2} + b \frac{dy_2}{dt} + c y_2 &= a \left( 2 \frac{dy_1}{dt} + t \frac{d^2 y_1}{dt^2} \right) + b \left( y_1 + t \frac{dy_1}{dt} \right) + cty_1 \\
+&= t \left( a \frac{d^2 y_1}{dt^2} + b \frac{dy_1}{dt} + cy_1 \right) + \left( 2a \frac{dy_1}{dt} + by_1 \right) \\
+&= 0t + (2a \zeta + b)e^{\zeta t} \\
+&= \left( 2a \left( \frac{-b}{2a} \right) + b \right)e^{\zeta t} \\
+&= 0
+\end{align*}
+So we have two linearly independent solutions
+\[ y_1(t) = e^{\zeta t},\quad y_2(t) = te^{\zeta t}, \]
+and so the general solution is given by
+\[ y(t) = c_1 e^{\zeta t} + c_2 t e^{\zeta t},\ c_1, c_2 \in \reals \]
+
+\subsection{Summary}
+The general solution of the 
+\[ a \frac{d^2 y}{dt^2} + b \frac{dy}{dt} + cy = 0 \quad (a, b, c \in \reals,\ a \not= 0)\]
+is
+\[ y(t) = \begin{cases}
+c_1 e^{(\zeta + \omega)t} + c_2 e^{(\zeta - \omega)t} & \text{if } b^2 - 4ac > 0, \\
+e^{\zeta t} (c_1 \cos(\omega t) + c_2 \sin(\omega t)) & \text{if } b^2 - 4ac < 0, \\
+e^{\zeta t}(c_1 + c_2 t) & \text{if } b^2 - 4ac = 0
+\end{cases} \]
+where
+\[ \zeta = \frac{-b}{2a}, \quad \omega = \frac{\sqrt{|b^2 - 4ac|}}{2a} \]
+
+\subsection{Example}
+Find the general solution of
+\[ \frac{d^2 y}{dx^2} - 2\frac{dy}{dx} - 8y = 0. \]
+
+\subsection*{Solution}
+The trial solution $y = e^{\lambda x}$ yields the characteristic equation
+\[ \lambda^2 - 2\lambda - 8\lambda = 0. \]
+Since
+\[ (2)^2 - 4)(1)(-8) = 36 > 0, \]
+we know there are two distinct real roots
+\[ \lambda_\pm = \frac{2 \pm \sqrt{36}}{2} = \frac{2 \pm 6}{2} = 1 \pm 3 \Rightarrow \lambda_+ = 4,\ \lambda_- = -2. \]
+Thus the general solution is
+\[ y(x) = Ae^{4x} + Be^{-2x},\ A, B \in \reals \]
+
+\subsection{Example}
+Find the general solution of 
+\[ \frac{d^2 y}{dx^2} - 2\frac{dy}{dx} - 8y = x. \]
+
+\subsection*{Solution}
+First, we try to find a particular solution by guessing
+\[ y_p = c_0 + c_1 x. \]
+Then
+\begin{align*}
+\frac{d^2 y_p}{dx^2} - 2 \frac{dy_p}{dx} - 8 y_p &= 0 - 2c_1 - 8(c_0 + c_1x) \\
+&= -2c_1 - 8c_0 - 8c_1 x \\
+&= x \Leftrightarrow \begin{cases}
+-2c_1  - 8c_0 = 0, \\
+-8c_1 = 1
+\end{cases} \\
+&\Leftrightarrow \begin{cases}
+c_1 = -\frac{1}{8} \\
+c_0 = -\frac{1}{4}c_1 = \frac{1}{32}
+\end{cases}
+\end{align*}
+
+shows that 
+\[ y_p = \frac{1}{32} - \frac{1}{8}x \]
+is a particular solution.\\
+Since we know from the previous example that
+\[ y_h = Ae^{4x} + Be^{-2x},\ A, B \in \reals \]
+is the general solution to the \underline{homogeneous} ODE
+\[ \frac{d^2 y}{dx^2} - 2\frac{dy}{dx} - 8y = 0, \]
+we conclude that 
+\[ y = y_h + y_p = Ae^{4x} + Be^{-2x} + \frac{1}{32} - \frac{1}{8}x,\ A, B \in \reals \]
+is the general solution of the non-homogeneous ODE
+\[ \frac{d^2 y}{dx^2} - 2\frac{dy}{dx} - 8y = x \]
+
+\subsection{Example}
+Solve the IVP
+\begin{align*}
+\frac{d^2 y}{dt^2} - 2\frac{dy}{dt} + 5y &= 0, \\
+y(0) = 1, \frac{dy}{dt}(0) = 2.
+\end{align*}
+
+\subsection*{Solution}
+The trial solution $y = e^{\lambda t}$ yields the characteristic equation
+\[ \lambda^2 - 2\lambda + 5\lambda = 0 \]
+Since
+\[ (-2)^2 - 4(1)(5) = -16 < 0, \]
+there are two complex roots
+\[ \lambda_\pm = \frac{2 \pm \sqrt{-16}}{2} = 1 \pm 2i \Rightarrow \lambda_+ = 1 + 2i, \lambda_- = 1 - 2i \]
+Thus the general complex solution is
+\begin{align*}
+y(t) &= Ae^{(1 + 2i)t} + Be^{(1 - 2i)t} \\
+&= Ae^t (\cos(2t) + i\sin(2t)) + Be^t (\cos(2t) - i \sin(2t)),
+\end{align*}
+which yields the general real solution
+\[ y(t) = e^t (A \cos(2t) + B \sin(2t)),\ A, B \in \reals. \]
+Then
+\begin{align*}
+\frac{dy}{dt} &= e^t \left[ A \cos(2t) + B \sin(2t) + 2(-A \sin(2t) B \cos(2t)) \right] \\
+&= e^t \left[ (A + 2B) \cos(2t) + (B - 2A)\sin(2t) \right].
+\end{align*}
+The initial conditions then imply that
+\begin{align*}
+y(0) &= A = 1, \\
+\frac{dy}{dt}(0) &= A + 2B = 2 \Rightarrow B = \frac{1}{2}.
+\end{align*}
+Thus,
+\[ y(t) = e^t(\cos(2t) + \frac{1}{2}\sin(2t)) \]
+solves the IVP.
+
+\subsection{Example}
+Find the general solution of
+\[ \frac{d^2 y}{dx^2} + 2 \frac{dy}{dx} + y = 0 \]
+
+\subsection*{Solution}
+The trial solution $y = e^{\lambda x}$ yields the characteristic equation
+\[ \lambda^2 + 2\lambda + 1 = 0. \]
+Since
+\[ (-2)^2 - 4(1)(1) = 0, \]
+there is only one repeated real root given by
+\[ \lambda = \frac{-2}{2} = -1. \]
+Thus the general solution is
+\[ y(x) = Ae^{-x} + Bxe^{-x},\ A, B \in \reals. \]
+
+\subsection{Guessing particular solutions}
+\[ a\frac{d^2y}{dx^2} + b \frac{dy}{dx} + cy = q(x) \]
+\begin{enumerate}[ (i) ]
+\item If
+\[ q(x) = e^{kx} \sum_{j=0}^n b_j x^j, \]
+try
+\[ y_p(x) = \begin{cases}
+e^{kx} \displaystyle{\sum_{j=0}^n c_j x^j} & \text{if } k \text{ is not a root of the characteristic equation}, \\
+x e^{kx} \displaystyle{\sum_{j=0}^n c_j x^j}  & \text{if } k \text{ is a non-repeated root}, \\
+ x^2 e^{kx} \displaystyle{\sum_{j=0}^n c_j x^j}  & \text{if } k \text{ is a repeated root}
+\end{cases} \]
+
+\item If
+\[ q(x) = e^{kx} (b_1 \cos(vt) + b_2 \sin(vt)), \]
+try
+\[ y_p(x) = \begin{cases}
+e^{kx} (c_1 \cos(vt) + c_2 \sin(vt)) & \text{if } k \pm iv \text{ are not roots of the characteristic equation}, \\
+xe^{kx} (c_1 \cos(vt) + c_2 \sin(vt)) & \text{otherwise} \\
+\end{cases} \]
+\end{enumerate}
+
+\end{document}

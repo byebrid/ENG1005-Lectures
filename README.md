@@ -127,3 +127,31 @@ Written by Alexander (Lex) Gallon for Monash University ENG1005 - Engineering Ma
   - General and particular solutions (§10.4.2)
   - Boundary value problems (BVP) (§10.4.3)
   - Initial value problems (IVP) (§10.4.3)
+- [Lecture 28](<Lecture 28/lecture28_notes.pdf>)
+  - IVPs - continued
+  - Separable ODEs (§10.5.3)
+  - Linear 1st order ODEs (§10.5.9)
+  - Linear differential equations (§10.8)
+- [Lecture 29](<Lecture 29/lecture29_notes.pdf>)
+  - Linear differential equations - continued
+  - General solutions of linear ODEs (§10.8.2)
+  - Linear homogeneous 2nd order constant coefficients ODEs (§10.9.1, 10.10)
+- [Lecture 30](<Lecture 30/lecture30_notes.pdf>)
+  - Linear homogeneous 2nd order constant coefficients ODEs - continued
+- [Lecture 31](<Lecture 31/lecture31_notes.pdf>)
+  - Laplace Transform (§11.2, 11.2.1)
+  - Linearity (§11.2.4)
+  - Laplace Transforms of simple functions (§11.2.2)
+  - Existence of the Laplace Transform (§11.2.3)
+- [Lecture 32](<Lecture 32/lecture32_notes.pdf>)
+  - Simple Laplace Transforms - continued
+  - The s-shifting property (§11.2.4)
+  - Derivatives of Laplace Transforms (§11.2.4)
+  - The Laplace Transforms of derivatives (§11.3.1)
+- [Lecture 33](<Lecture 33/lecture33_notes.pdf>)
+  - Laplace Transforms of integrals (§11.3.2)
+  - The inverse Laplace Transform (§11.2.7)
+  - Inverse of the s-shift property (§11.2.9)
+  - Convolutions
+  - Impulse
+

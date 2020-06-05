@@ -1,0 +1,210 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 28}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+\url{https://echo360.org.au/lesson/G_8402119b-734b-4e1e-a3b4-7e907e86ddba_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-05-26T15:58:00.000_2020-05-26T16:53:00.000/classroom#sortDirection=desc}
+
+\section{Initial value problems (IVP) - continued}
+\subsection{Example}
+Newton's law of cooling states that the temperature of a homogeneous object satisfies
+\[ \frac{dT}{dt} = -K(T - T_a) \]
+where $T_a$ is the ambient temperature, $T(t)$ is temperature of body at time $t$, $K > 0$ is some decay constant. The initial condition is
+\[ T(t_0) = T_0 \]
+
+Find the temperature of the body at time $t > t_0$ assuming that $K > 0$ and $T_0 > T_a$.
+
+\subsection{Solution}
+\begin{align*}
+\frac{dT}{dt} = K(T - T_a) &\Rightarrow \frac{dT}{T - T_a} = -k\, dt \\
+&\Rightarrow \int_{T_0}^T \frac{d\tilde{T}}{T-T_a} = -K \int_{t_0}^{t} d\tilde{t} \\
+&\Rightarrow \left. \ln(\tilde{T} - T_a) \right|_{T_0}^T = -K t|_{t_0}^t \\
+&\Rightarrow \ln\left( \frac{T-T_a}{T_0 - T_a} \right) = -K(t - t_0) \\
+&\Rightarrow \frac{T-T_a}{T_0 - T_a} = e^{-K(t - t_0)} \\
+&\Rightarrow T = (T_0 - T_a) e^{-K(t - t_0)} + T_a
+\end{align*}
+Note that 
+\[ \lim_{t \rightarrow \infty} T(t) = T_a \]
+
+\subsection{Remark}
+The IVP for an $n$th order ODE
+\[ \frac{d^ny}{dt^n} = F \left( x, y, \frac{dy}{dt}, \frac{d^2y}{dt^2}, ..., \frac{d^{n-1}y}{dt^{n-1}} \right) \]
+need $n$ initial conditions
+\[ y(t_0) = y_0, \frac{dy}{dt}(t_0)=y_1, ... \frac{d^{n-1}y}{dt^{n-1}}(t_0) = y_{n-1} \]
+to be \textbf{uniquely solvable}.
+
+\section{Separable ODEs §10.5.3}
+A 1st order ODE
+\[ \frac{dy}{dy} = F(t, y) \]
+is called separable if $F(t,y)$ can be written as
+\[ F(t, y) = \frac{G(t)}{H(y)} \]
+To solve these equations, we write
+\[ \frac{dy}{dt} = \frac{G(t)}{H(y)} \]
+as
+\[ H(y) \frac{dy}{dt} = G(t) \]
+Then we integrate both sides with respect to $t$ to get
+\[ \int H(y) \frac{dy}{dt}\, dt = \int G(t)\, dt \]
+We then use change of variables
+\[ y = y(t),\quad dy = \frac{dy}{dt}\, dt \]
+to get
+\[ \int H(y)\, dy = \int G(t)\, dt \]
+In general, this yields an implicit solution to the above ODE.
+
+For IVP with initial condition
+\[ y(t_0) = y_0, \]
+then we can write the solution as
+\[ \int_{y_0}^y H(\tilde{y})\, d\tilde{t} = \int_{t_0}^t G(\tilde{t})\, d\tilde{t} \]
+
+\subsection{Informal version}
+\begin{align*}
+\frac{dy}{dt} = \frac{G(t)}{h(y)} &\Rightarrow H(y)\, dy = G(t) \, dt \\
+&\Rightarrow \int H(y)\, dy = \int G(t) \, dt
+\end{align*}
+
+\subsection{Example}
+\[ \frac{dV}{dt}= \sqrt{V} \] 
+
+\subsection{Solution}
+This is separable since we can trivially write the RHS as
+\[ \sqrt{V} = \frac{1}{\frac{1}{\sqrt{V}}} = \frac{G(t)}{H(V)} \]
+
+\begin{align*}
+\frac{dV}{dt} = \sqrt{V} &\Rightarrow \frac{1}{\sqrt{V}}\, dV = dt \\
+&\Rightarrow \int \frac{1}{\sqrt{V}}\, dV = \int dt \\
+&\Rightarrow 2\sqrt{V} = t + 2c \quad (\text{only do } 2c \text{ to simplify next step}) \\
+&\Rightarrow \sqrt{V} = \frac{t}{2} + c \\
+&\Rightarrow V = \left( \frac{t}{2} + c \right)^2
+\end{align*}
+
+\section{Linear 1st order ODEs §10.5.9}
+The most general 1st order ODE is
+\[ \frac{dy}{dt} + p(t)y = q(t) \]
+If $q(t) = 0$, then the ODE is said to be \textbf{homogeneous}, and otherwise it is called inhomogeneous or nonhomogeneous.\\
+To solve this equation, we multiply it by an integrating factor $I(t)$ to get 
+\[ I \frac{dy}{dt} + Ip(t)y = Iq(t) \]
+or equivalently
+\[ \frac{d}{dt}(Iy) - \frac{dI}{dt}y + Ipy = Iq \]
+We can write the above ODE as
+\[ \frac{d}{dt}(Iy) + \left( Ip - \frac{dI}{dt} \right)y = Iq \]
+Now, we could simplify this is we choose $I$ such that those terms in the right set of brackets become zero. So we choose $I$ to satisfy
+\[ \frac{dI}{dt} = Ip \]
+But this is a separable ODE! So,
+\begin{align*}
+\frac{dI}{dt} = Ip &\Rightarrow \frac{dI}{I} = p\, dt \\
+&\Rightarrow \int \frac{dI}{I} = \int p\, dt \\
+&\Rightarrow \ln(I) = \int p(t)\, dt \\
+&\Rightarrow I(t) = e^{\int p(t)\, dt}
+\end{align*}
+With this choice of $I(t)$, we get that 
+\[ \frac{d}{dt}(Iy) = Iq. \]
+Integrate both sides to get
+\begin{align*}
+I(t) y(t) &= \int I(t) q(t)\, dt + c \\
+\Rightarrow y(t) &= \frac{1}{I(t)} \left[ \int I(t) q(t)\, dt + c \right],
+\end{align*}
+where
+\[ I(t) = e^{\int p(t)\, dt}. \]
+
+\subsection{Example}
+Solve the IVP
+\[ \frac{dy}{dt} + ty = t \]
+\[ y(0) = 2.\]
+
+\subsection{Solution}
+In our case,
+\[ p(t) = t,\ q(t) = t \]
+So we can find the integrating factor
+\[ I(t) = e^{\int t\, dt} = e^{\frac{1}{2} t^2} \quad (\text{note no need to worry about integration constant}). \]
+So the general solution is given by
+\begin{align*}
+y(t) &= \frac{1}{I(t)} \left[ \int I(t) q(t)\, dt + c \right] \\
+&= e^{-\frac{1}{2} t^2} \left[ \int e^{\frac{1}{2} t^2} t\, dt + c \right] \\
+&= e^{-\frac{1}{2} t^2} \left[ e^{\frac{1}{2} t^2} + c \right] \\
+&= 1 + c e^{-\frac{1}{2} t^2}.
+\end{align*}
+And now, for the initial condition,
+\begin{align*}
+y(0) = 2 &\Rightarrow y(0) 1 + c e^{-\frac{1}{2} t^2} = 1 + c = 2 \\
+&\Rightarrow c = 1.
+\end{align*}
+So we can conclude that
+\[ y(t) = 1 + e^{-\frac{1}{2} t^2} \]
+solves the IVP.
+
+\section{Linear differential equations §10.8}
+\subsection{Superposition principle}
+Suppose $y_1(x)$ and $y_2(x)$ both solve the following linear homogeneous ODE
+\[ \sum_{k=0}^n a_k(x) \frac{d^ky}{dx^k} = 0 \]
+Let
+\[ \tilde{y}(x) = \lambda_1 y_1(x) + \lambda_2 y_2(x),\ \lambda_1, \lambda_2 \in \reals \]
+Then
+\begin{align*}
+\sum_{k=0}^n a_k(x) \frac{d^ky}{dx^k} &= \sum_{k=0}^n a_k(x) \left( \lambda_1 \frac{d^k y_1}{dx^k} + \lambda_2 \frac{d^k y_2}{dx^k} \right) \\
+&= \lambda_1 \sum_{k=0}^n a_k(x) \frac{d^k y}{dx^k} + \lambda_2 \sum_{k=0}^n a_k(x) \frac{d^k y}{dx^k} \\
+&= 0
+\end{align*}
+shows that
+\[ \tilde{y}(x) = \lambda_1 y_1(x) + \lambda_2 y_2(x),\ \lambda_1, \lambda_2 \in \reals \]
+solves the linear, homogeneous ODE.
+
+\end{document}

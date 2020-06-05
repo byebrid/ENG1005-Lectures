@@ -1,0 +1,190 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Purely for Laplace symbol
+\usepackage[scr]{rsfso}
+\newcommand{\Laplace}{\mathscr{L}}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 31}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+\url{https://echo360.org.au/lesson/G_8402119b-734b-4e1e-a3b4-7e907e86ddba_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-06-02T15:58:00.000_2020-06-02T16:53:00.000/classroom#sortDirection=desc}
+
+\section{Laplace Transform §11.2, 11.2.1}
+Given a function $f(t)$ defined for $t \geq 0$, the Laplace Transform of $f$ is defined by
+\[ F(s) = \int_0^\infty e^{-st}f(t)\, dt,\quad s \in D \subset \complex, \]
+where $D$ is some sort of domain. Note you could consider $F$ as a function of two variables, namely the real and imaginary components of $s$, but I guess we'll see defining it as above is preferable.
+
+The function $F(s)$ is often written
+\[ F(s) = \Laplace[f](s). \]
+
+It can be used to transform something from a time domain ($f(t)$)into a complex frequency domain ($\Laplace[f](s)$).
+
+\section{Linearity §11.2.4}
+Given $\lambda \in \complex$, we have
+\begin{align*}
+\Laplace[\lambda f_1(t) +f_2(t)](s) &= \int_0^\infty e^{-ts}(\lambda f_1(t) +f_2(t))\, dt \\
+&= \lambda \int_0^\infty e^{-ts}f_1(t)\, dt + \int_0^\infty e^{-st}f_2(t)\, dt \\
+&= \lambda \Laplace[f_1(t)](s) + \Laplace[f_2(t)](s) \\
+\Rightarrow \Laplace[\lambda f_1(t) +f_2(t)](s) &= \lambda \Laplace[f_1(t)](s) + \Laplace[f_2(t)](s)
+\end{align*}
+for all $\lambda \in \complex$ and $f_1(t)$, $f_2(t)$ defined for $t\geq 0$.
+
+\section{Laplace Transforms of simple functions §11.2.2}
+\subsection{Example}
+Let
+\[ f(t) = 1,\ t \geq 0. \]
+Then
+\begin{align*}
+\Laplace[1](s) &= \int_0^\infty e^{-st}\, dt \\
+&= \lim_{T \rightarrow \infty} \int_0^T e^{-st}\, dt \\
+&= \lim_{T \rightarrow \infty} \left[\left. -1\frac{1}{s}e^{-st} \right|_0^T \right] \\
+&= \lim_{T \rightarrow \infty} \left[-\frac{1}{s}e^{-sT} + \frac{1}{s} \right] \\
+&= \lim_{T \rightarrow \infty}-\frac{1}{s}e^{-sT} + \frac{1}{s} \\
+&= -\frac{1}{s} \lim_{T \rightarrow \infty} e^{-\theta T - i\omega T} + \frac{1}{s} \\
+&= -\frac{1}{s} \lim_{T \rightarrow \infty} e^{-\sigma T} e^{-i\omega T} + \frac{1}{s} \\
+&= -\frac{1}{s} \lim_{T \rightarrow \infty} e^{-\sigma T} (\cos(\omega T) - i\sin(\omega T)) + \frac{1}{s}.
+\end{align*}
+Note the magnitude
+\[ \left| e^{-i\omega T} \right| = |\cos(\omega T) - i\sin(\omega T)| = 1. \]
+So we now have
+\begin{align*}
+\Laplace[1](s) &= \frac{1}{s} \quad \text{ IF } \sigma = \text{Re}(s) > 0.
+\end{align*}
+We got this by noting that, for that integral to converge, that limit had to reach zero, meaning
+\[ \lim_{T \rightarrow \infty} e^{-\sigma T} = 0, \]
+which will only happen for positive $\sigma$.
+
+\subsection{Example}
+Let
+\[ f(t) = t,\ t\geq 0. \]
+Then
+\begin{align*}
+\Laplace[t](s) &= \int_0^\infty e^{-st} t \, dt \\
+&= \lim_{T \rightarrow \infty} \int_0^T e^{-st} t \, dt \\
+&= \lim_{T \rightarrow \infty} \left[ \left. -\frac{e^{-st}}{s}t \right|_0^T + \frac{1}{s} \int_0^T e^{-st}\, dt \right] \\
+&= \lim_{T \rightarrow \infty} -\frac{e^{-sT}}{s}T + \frac{1}{s}\lim_{T \rightarrow \infty} \int_0^T e^{-st}\, dt \\
+&=\lim_{T \rightarrow \infty} -\frac{e^{-sT}}{s}T + \frac{1}{s} \Laplace[1](s),\ \text{Re}(s) > 0 \\
+&= \lim_{T \rightarrow \infty} -\frac{e^{-sT}}{s}T + \frac{1}{s^2} \\
+&= 0 + \frac{1}{s^2} \\
+&= \frac{1}{s^2}.
+\end{align*}
+Thus,
+\[ \Laplace[t](s) = \frac{1}{s^2},\ \text{Re}(s) > 0. \]
+
+\section{Example}
+Let
+\[ f(t) = e^{kt},\ k \in \complex,\ t \geq 0. \]
+Then
+\begin{align*}
+\Laplace[e^{kt}](s) &= \int_0^\infty e^{-st}e^{kt}\, dt \\
+&= \int_0^\infty e^{t(k-s)}\, dt \\
+&= \lim_{T \rightarrow \infty} \int_0^T e^{t(k-s)}\, dt \\
+&= \lim_{T \rightarrow \infty} \left[ \left. \frac{1}{k-s}e^{t(k-s)} \right|_0^T \right] \\
+&= \lim_{T \rightarrow \infty} \left[ \frac{1}{k-s}e^{T(k-s)} - \frac{1}{k-s} \right] \\
+&= \frac{1}{k-s} \lim_{T \rightarrow \infty} e^{-(s-k)T} + \frac{1}{s-k}.
+\end{align*}
+We now want
+\[ \text{Re}(s-k) > 0 \Rightarrow \text{Re}(s) > \text{Re}(k), \]
+so the limit reaches zero, so we then get
+\[ \Laplace[e^{kt}](s) = \frac{1}{s-k},\ \text{Re}(s) > \text{Re}(k) \]
+
+\section{Existence of the Laplace Transform §11.2.3}
+\subsection{Theorem}
+If $f(t)$ is a piecewise continuous function for $t \geq 0$ and there exists constants $M \geq 0, \lambda \in \reals$ such that
+\[ |f(t)| \leq Me^{\lambda t},\ t \geq 0, \] 
+then the Laplace Transform
+\[ \Laplace[f](s) = \int_0^\infty e^{-st}f(t)\, dt \]
+exists and is well-defined for $\text{Re}(s) > \lambda$.
+
+To see why this is the case, we note that
+\begin{align*}
+\left| \int_0^T e^{-st} f(t)\, dt \right| &\leq \int_0^T \left| e^{-st}f(t) \right|\, dt \\
+&\leq \int_0^T |e^{-st}| |f(t)| \, dt.
+\end{align*}
+Letting
+\[ s = \sigma + i \omega, \]
+we see that
+\[ e^{-st} = e^{-\sigma t + i\omega t} = e^{-\sigma t}e^{i \omega t} \]
+from which we conclude that
+\[ e^{-st} = |e^{-\sigma t}| |e^{i \omega t}| = |e^{-\sigma t}|. \]
+Substituting this into the inequality gives
+\[ \left| \int_0^T e^{-st} f(t)\, dt \right| \leq \int_0^T e^{-\sigma t} |f(t)| \, dt.  \]
+Now, if
+\[ |f(t)| \leq Me^{\lambda t}, \]
+then
+\begin{align*}
+\left| \int_0^T e^{-st} f(t)\, dt \right| &\leq M \int_0^T e^{-\sigma t} e^{\lambda t} \, dt \\
+&\leq  M \int_0^T e^{-(\sigma - \lambda) t} \, dt \\
+&=\leq M \left[ \left. \frac{-1}{\sigma - \lambda} e^{-(\sigma - \lambda)t} \right|_0^T \right] \\
+&\leq M \left[ \frac{-1}{\sigma - \lambda} e^{-(\sigma - \lambda)T} + \frac{1}{\sigma - \lambda} \right]
+\end{align*}
+
+Assuming that
+\[ \sigma - \lambda >0 \Leftrightarrow \text{Re}(s) > \lambda, \]
+we see from letting $T \rightarrow \infty$ in the above inequality that 
+\[ \left| \int_0^T e^{-st} f(t)\, dt \right| \leq \frac{M}{\sigma - \lambda}, \]
+and
+\[ \int_0^\infty e^{-st} f(t)\, dt \text{ exists.} \]
+
+\end{document}

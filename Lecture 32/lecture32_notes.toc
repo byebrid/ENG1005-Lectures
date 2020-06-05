@@ -1,0 +1,12 @@
+\contentsline {section}{Simple Laplace Transforms - continued}{1}{section*.3}%
+\contentsline {section}{The s-shifting property §11.2.4}{2}{section*.4}%
+\contentsline {subsection}{Theorem}{2}{section*.5}%
+\contentsline {subsection}{Proof}{2}{section*.6}%
+\contentsline {subsection}{Example}{2}{section*.7}%
+\contentsline {section}{Derivatives of Laplace Transforms §11.2.4}{3}{section*.9}%
+\contentsline {subsection}{Theorem}{3}{section*.10}%
+\contentsline {subsection}{Proof}{3}{section*.11}%
+\contentsline {subsection}{Example}{3}{section*.12}%
+\contentsline {section}{The Laplace Transforms of derivatives §11.3.1}{4}{section*.14}%
+\contentsline {subsection}{Theorem}{4}{section*.15}%
+\contentsline {subsection}{Proof}{4}{section*.16}%

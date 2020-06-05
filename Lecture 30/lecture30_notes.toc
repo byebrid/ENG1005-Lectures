@@ -1,0 +1,7 @@
+\contentsline {section}{Linear homogeneous 2nd order constant coefficients ODEs - continued}{1}{section*.3}%
+\contentsline {subsection}{Summary}{2}{section*.5}%
+\contentsline {subsection}{Example}{2}{section*.6}%
+\contentsline {subsection}{Example}{3}{section*.8}%
+\contentsline {subsection}{Example}{3}{section*.10}%
+\contentsline {subsection}{Example}{4}{section*.12}%
+\contentsline {subsection}{Guessing particular solutions}{5}{section*.14}%

@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Purely for Laplace symbol
+\usepackage[scr]{rsfso}
+\newcommand{\Laplace}{\mathscr{L}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 33}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+\url{https://echo360.org.au/lesson/G_35fe23e0-41ee-4e6f-b0f5-05f4155bb7b0_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-06-04T15:58:00.000_2020-06-04T16:53:00.000/classroom#sortDirection=desc}
+
+\section{Laplace transforms of integrals §11.3.2}
+Let
+\[ g(t) = \int_0^t f(\tau)\, d\tau. \]
+Then, by the Fundamental Theorem of Calculus, we have
+\[\frac{dg}{dt}(t) = f(t).  \]
+So
+\[ \Laplace[f(t)](s) = \Laplace \left[ \frac{dg}{dt}(t) \right](s) = s\Laplace[g(t)](s) - g(0) = s\Laplace \left[ \int_0^t f(\tau)\, d\tau \right](s). \]
+It follows that
+\[ \Laplace \left[ \int_0^t f(\tau)\, d\tau \right](s) = \frac{1}{s} \Laplace[f(t)](s). \]
+
+\section{The inverse Laplace Transform §11.2.7}
+If $f(t)$ and $g(t)$ both satisfy 
+\[ |f(t)| \leq Me^{\sigma t} \text{ and } |g(t)| \leq Me^{\sigma t},\ t \geq 0, \]
+for some $M \geq 0$ and $\sigma \in \reals$, and
+\[ \Laplace[f(t)](s) = \Laplace[g(t)](s),\ \text{Re}(s) > \sigma. \]
+Then it can be shown that
+\[ f(t) = g(t),\ t \geq 0. \]
+This allows us to uniquely define the inverse Laplace transform by
+\[ \Laplace^{-1}[\Laplace[f(t)]] = H(t)f(t), \]
+where $H(t)$ is the Heaviside step function
+\[ H(t) = \begin{cases}
+1 &\text{if } t \geq 0, \\
+0 &\text{if } t < 0
+\end{cases} \]
+
+\subsection{Bronwich integral (not examinable)}
+The inverse Laplace transform can be computed using
+\[ f(t) = \Laplace^{-1}[F(s)](t) := \frac{1}{2\pi i} \lim_{T \rightarrow \infty } \int_{\sigma -iT}^{\sigma + iT} F(s)\, ds \]
+where all singularities of $F(s)$ lie in the region $\text{Re}(s) > \sigma$.
+
+\subsection{Example}
+Compute
+\[ \Laplace^{-1}\left[ \frac{s+1}{s(s^2 + 2)} \right](t) \]
+
+\subsection*{Solution}
+Use partial fractions, we know that
+\begin{align*}
+\frac{s+1}{s(s^2 + 1)} &= \frac{1}{2}\frac{1}{s} + \frac{1 - \frac{1}{2}s}{s^2 + 2} \\
+&= \frac{1}{2}\frac{1}{s} + \frac{1}{\sqrt{2}}\frac{\sqrt{2}}{s^2 + (\sqrt{2})^2} - \frac{1}{2}\frac{s}{s^2 + (\sqrt{2})^2} \\
+&= \Laplace \left[ \frac{1}{2} + \frac{1}{\sqrt{2}}\sin(\sqrt{2}t) - \frac{1}{2}\cos(\sqrt{2}t) \right](s)
+\end{align*}
+So then
+\[ \Laplace^{-1}\left[ \frac{s+1}{s(s^2 + 2)} \right](t) = \frac{1}{2} + \frac{1}{\sqrt{2}}\sin(\sqrt{2}t) - \frac{1}{2}\cos(\sqrt{2}t) \]
+
+\section{Inverse of the s-shift property §11.2.9}
+\subsection{Theorem}
+Suppose $f(t)$, $t \geq 0$, has a Laplace Transform
+\[ F(s) = \Laplace[f(t)](s),\ \text{Re}(s) > \sigma, \]
+and $a \in \reals$. Then
+\[ \Laplace^{-1}[e^{-as}F(s)](t) = H(t-a)f(t-a). \]
+
+\subsection{Proof}
+By definition
+\begin{align*}
+\Laplace[H(t-a)f(t-a)](s) &= \int_0^\infty H(t-a)f(t-a)\, dt \\
+&= \int_{-a}^\infty e^{-s(\tau + a)}H(\tau)f(\tau)\, d\tau,\quad , \tau = t-a \\
+&= \int_0^\infty e^{-s(\tau + a)}f(\tau)\, d\tau,\quad , \tau = t-a \\
+&= \int_0^\infty e^{-s\tau}e^{-sa}f(\tau)\, d\tau,\quad , \tau = t-a \\
+&= e^{-sa} \int_0^\infty e^{-s\tau}f(\tau)\, d\tau,\quad , \tau = t-a \\
+&= e^{-sa} \Laplace[f(t)](s) \\
+\Rightarrow \Laplace[H(t-a)f(t-a)](s) &= e^{-sa} \Laplace[f(t)](s) = e^{-sa}F(s) \\
+\Rightarrow H(t-a)f(t-a) &= \Laplace^{-1}[e^{-sa}F(s)](t)
+\end{align*}
+
+\section{Convolutions}
+The convolution of two functions $f(t)$ and $g(t)$, $t \geq 0$, denoted by $f*g(t)$, is the function defined by
+\[ (f*g)(t) = \int_0^t f(\tau) g(t - \tau)\, d\tau . \]
+
+\subsection{Theorem}
+Suppose $f(t)$ and $g(t)$ are two functions satisfying
+\[ |f(t)| \leq Me^{\sigma t} \text{ and } |g(t)| \leq Me^{\sigma t},\ t \geq 0 \]
+for some $M \geq 0$, and $\sigma \in \reals$. Then
+\[ \Laplace[(f*g)(t)](s) = F(s)G(s),\ \text{Re}(s) > \sigma, \]
+where
+\[ F(s) = \Laplace[f(t)](s) \text{ and } G(s) = \Laplace[g(t)](s) . \]
+
+\subsection{Example}
+Use the Laplace transform to show that
+\[ \int_0^t t\sin(t - \tau) \, d\tau = t - \sin(t). \]
+Note you could probably do integration by parts but whatever.
+
+\subsection*{Solution}
+\begin{align*}
+\Laplace \left[ \int_0^t t\sin(t - \tau) \, d\tau \right](s) &= \Laplace[t * \sin(t)](s) \\
+&= \Laplace[t](s) \Laplace[\sin(t)](s) \\
+&= \frac{1}{s^2}\frac{1}{s^2 + 1} \\
+&= \frac{1}{s^2} - \frac{1}{s^2+1} \\
+\Rightarrow \int_0^t t\sin(t - \tau) \, d\tau &= \Laplace^{-1} \left[ \frac{1}{s^2} - \frac{1}{s^2+1} \right](t) \\
+&= \Laplace^{-1}\left[ \frac{1}{s^2} \right](t) - \Laplace^{-1}\left[ \frac{1}{s^2 + 1} \right](t) \\
+&= t - \sin(t)
+\end{align*}
+
+\section{Impulse}
+Mathematically, a short, sharp forcing at $t=0	$ is represented by the Dirac Delta Function (although it's not really a function), denoted by $\delta(t)$, which is defined by
+\[ \delta(t) = 0,\ t=0, \]
+and
+\[ \int_a^b f(t) \delta(t)\, dt = \begin{cases}
+f(0) &\text{if } 0 \in (a, b) \\
+0 &\text{otherwise} 
+\end{cases} \]
+for all continuous functions $f(t)$ that are defined on $[a, b]$.
+
+\subsection{Example}
+Compute the Laplace transform of
+\[ \delta(t - a),\ a > 0. \]
+
+\subsection*{Solution}
+\[ \Laplace[\delta(t - a)](s) = \int_0^\infty e^{-st} \delta(t - a)]\, dt = e^{-sa}. \]
+\end{document}

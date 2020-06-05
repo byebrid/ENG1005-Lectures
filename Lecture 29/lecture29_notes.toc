@@ -1,0 +1,7 @@
+\contentsline {section}{Linear differential equations - continued}{1}{section*.3}%
+\contentsline {subsection}{Reduction of non-homogeneous ODE to a homogeneous ODE}{1}{section*.4}%
+\contentsline {section}{General solutions of linear ODEs §10.8.2}{2}{section*.5}%
+\contentsline {subsection}{Definition}{2}{section*.6}%
+\contentsline {subsection}{Example}{2}{section*.7}%
+\contentsline {subsection}{Theorem}{2}{section*.9}%
+\contentsline {section}{Linear homogeneous 2nd order constant coefficients ODEs §10.9.1, 10.10}{3}{section*.10}%

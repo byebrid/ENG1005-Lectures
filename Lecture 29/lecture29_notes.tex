@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Give ourself extra space for text
+\usepackage[left = 2.2cm, right = 2.2cm, top = 1.8cm, bottom = 2.8cm]{geometry}
+
+% Allows us to easily change the numbering system used in things like \begin{enumerate}. https://ctan.org/tex-archive/macros/latex/contrib/enumitem/
+\usepackage[shortlabels]{enumitem}
+
+% Turns table of contents, \refs, etc. into hyperlinks
+\usepackage{hyperref}
+
+% To include image, just use \includegraphics[scale=•]{relative path to image}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% Common sets
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+
+% Power set
+\newcommand{\powerset}{\mathcal{P}}
+
+% Identity matrix
+\newcommand{\ident}{\mathbb{I}}
+
+% Inverse hyperbolic functions
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\artanh}{artanh}
+
+% I hat, J hat, K hat
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\khat}{\boldsymbol{\hat{\textbf{k}}}}
+
+% Better vectors (for single characters)
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Allows us to number equations in \begin{align} statements, etc.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Augmented matrices: this allows us to make augmented matrics using something like \begin{bmatrix}[cc|c]. Taken from Stefan Kottwitz at https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% NOTE: This means \section does NOT number sections, but ensures that they appear in the table of contents, which does not occur if simply \section* is used. From egreg @ https://tex.stackexchange.com/a/30225.
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+\title{ENG1005: Lecture 29}
+\author{Lex Gallon}
+\maketitle
+
+\tableofcontents
+
+\section*{Video link}
+\url{https://echo360.org.au/lesson/G_32340f5d-ff38-43d2-be9d-d88ddb1b3611_b944cecf-8ba5-40d3-a870-0243a0a9e78c_2020-05-27T14:58:00.000_2020-05-27T15:53:00.000/classroom#sortDirection=desc}
+
+\section{Linear differential equations - continued}
+\subsection{Reduction of non-homogeneous ODE to a homogeneous ODE}
+Suppose $y_p(x)$ is a (particular) solution of the linear non-homogeneous ODE
+\[ \sum_{k=0}^n a_k(x) \frac{d^k y}{dx^k} = q(x). \]
+Setting
+\[ y_h(x) = y(x) - y_p(x), \]
+we see that
+\[ \sum_{k=0}^n a_k(x) \frac{d^k y_h}{d x^k} = \sum_{k=0}^n a_k(x) \frac{d^k y}{d x^k} - \sum_{k=0}^n a_k(x) \frac{d^k y_p}{d x^k} = 0. \]
+This shows that
+\[ y_h(x) = y(x) - y_p(x) \]
+satisfies the linear, homogeneous ODE
+\[ \sum_{k=0}^n a_k(x) \frac{d^k y}{dx^k} = 0 \]
+So you could find a general solution for a non-homogeneous equation as follows
+\[ y = y_h + y_p \]
+
+\section{General solutions of linear ODEs §10.8.2}
+\subsection{Definition}
+Functions $y_1(x), y_2(x), ..., y_p(x)$ are said to be \textbf{linearly dependent} if there exists numbers $c_1, c_2, ..., c_p$, not all zero, such that
+\[ \sum_{j=1}^p c_j y_j(x) = 0. \]
+Otherwise, the functions $y_1(x), y_2(x), ..., y_p(x)$ are said to be \textbf{linearly independent}.
+
+\subsection{Example}
+Determine if any of the following sets of functions are linearly independent.
+\begin{enumerate}[ (i) ]
+\item $\{ 1, t, t^2, (1+t)^2 \}$
+\item $\{ \sin(x), \cos(x) \}$
+\end{enumerate}
+
+\subsection*{Solution}
+\begin{enumerate}[ (i) ]
+\item Since
+\[ (1 + t)^2 = t^2 + 2t + 1, \]
+we see that
+\[ 1 + 2t + t^2 - (1 + t)^2 = 0. \]
+This shows that $\{ 1, t, t^2, (1+t)^2 \}$ is linearly dependent.
+
+\item Suppose there exists $c_1, c_2 \in \reals$ such that
+\[ c_1 \sin(x) + c_2 \cos(x) = 0. \]
+Evaluating this at $x=0$ and $x = \frac{\pi}{2}$ show that
+\[ c_2 = 0 \text{ and } c_1 = 0. \]
+So clearly, $\{ \sin(x), \cos(x) \}$ is linearly independent.
+\end{enumerate}
+
+\subsection{Theorem}
+If $y_1(x), y_2(x), ..., y_n(x)$ are linearly independent solutions of the following $n$th order linear homogeneous ODE,
+\[ \sum_{k=1}^n a_k(x) \frac{d^k y}{dx^k} = 0, \]
+then the general solution is given by
+\[ y(x) = \sum_{k=1}^n c_k y_k(x),\ c_k \in \reals \]
+(note this is an $n$-parameter family of solutions).\\
+Moreover, if $y_p(x)$ is any solution of the non-homogeneous linear ODE
+\[ \sum_{k=1}^n a_k(x) \frac{d^k y}{dx^k} = q(y), \]
+then the general solution of the non-homogeneous linear ODE
+\[ y(x) = \sum_{k=1}^n c_k y_k(x) + y_p(x)s. \]
+
+\section{Linear homogeneous 2nd order constant coefficients ODEs §10.9.1, 10.10}
+A 2nd order linear homogeneous ODE with constant coefficients is of the form
+\[ a \frac{d^2 y}{dt^2} + b \frac{dy}{dt} + cy = 0, \]
+where,
+\[ a, b, c \in \reals \text{ and } a \not= 0. \]
+To find solutions, we try
+\[ y(t) = e^{\lambda t} \quad (\lambda \text{ is constant}). \]
+Then,
+\[ a \frac{d^2 y}{dt^2} + b \frac{dy}{dt} + cy = \left( a \lambda^2 + b \lambda + c \right) e^{\lambda t}. \]
+We want this to equal zero. This shows that $y(t) = e^{\lambda t}$ will solve the ODE if and only if
+\[ a \lambda^2 + b \lambda + c = 0. \]
+This is called the \textbf{characteristic equation}.
+
+\subsection*{Case 1: $b^2 - 4ac > 0$}
+Then
+\[ \lambda_\pm = \zeta \pm \omega, \]
+where
+\[ \zeta = -\frac{b}{2a} \text{ and } \omega = \frac{\sqrt{|b^2 - 4ac|}}{2a} \]
+are the distinct real roots of the characteristic equation that yield the linearly independent solution
+\[ y_\pm(t) = e^{\lambda_\pm t} = e^{(\zeta \pm \omega)t}. \]
+Thus the general solution is then
+\[ y(t) = c_1+ e^{(\zeta + \omega)t} + c_2- e^{(\zeta - \omega)t},\ c_1, c_2- \in \reals \]
+
+\subsection*{Case 2: $b^2 - 4ac < 0$}
+Then
+\[ \lambda_\pm = \zeta \pm \omega i, \]
+are distinct complex roots of the characteristic equation that yield complex solutions
+\[ y_\pm (t) = e^{\lambda_\pm t} = e^{\zeta t} e^{\pm \omega t i} = e^{\zeta t} (\cos(\omega t) \pm i\sin(\omega t)). \]
+These complex solutions yield the real, linearly independent solution
+\[ y_1(t) = e^{\zeta t} \cos(\omega t) \text{ and } y_2(t) = e^{\zeta t} \sin(\omega t). \]
+Thus the general solution is given by
+\[ y(t) = c_1 e^{\zeta t} \cos(\omega t) + c_2 e^{\zeta t} \sin(\omega t),\ c_1, c_2 \in \reals \]
+
+\subsection*{Case 3: $b^2 - 4ac = 0$}
+Then
+\[ \lambda = \zeta \]
+is the only root of the characteristic equation which yields the solution
+\[ y_1(t) = e^{\zeta t}. \]
+But we need 2 linearly independent solutions to form a general solutions. So, to find a second, linearly independent solution, we set
+\[ y_2(t) = t y_1(t) = t e^{\zeta t}. \]
+Now, quickly note that the first and second derivatives are given by
+\begin{align*}
+\frac{dy_2}{dt} &= y_1 + t \frac{dy_1}{dt}, \\
+\frac{d^2 y_2}{dt^2} &= \frac{dy_1}{dt} + \left( t\frac{d^2 y_1}{dt^2} +  \frac{dy_1}{dt} \right) = 2 \frac{dy_1}{dt} + t \frac{d^2 y_1}{dt^2}.
+\end{align*}
+Now, observe that
+\begin{align*}
+a \frac{d^2 y_2}{dt^2} + b \frac{dy_2}{dt} + c y_2 &= a \left( 2 \frac{dy_1}{dt} + t \frac{d^2 y_1}{dt^2} \right) + b \left( y_1 + t \frac{dy_1}{dt} \right) + cty_1 \\
+&= t \left( a \frac{d^2 y_1}{dt^2} + b \frac{dy_1}{dt} + cy_1 \right) + \left( 2a \frac{dy_1}{dt} + by_1 \right) \\
+&= 0t + (2a \zeta + b)e^{\zeta t} \\
+&= \left( 2a \left( \frac{-b}{2a} \right) + b \right)e^{\zeta t} \\
+&= 0
+\end{align*}
+
+\end{document}
